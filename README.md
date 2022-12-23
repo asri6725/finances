@@ -2,15 +2,7 @@
 
 Creating an app that would load bank statements. 
 
-### Done 
-1. Read PDF
 
-### To Do
-
-1. Read CSV.
-2. Read multiple files.
-3. Generate insights.
-4. Store saved files. 
 
 ---
 # Getting Started with Create React App
