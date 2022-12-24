@@ -35,7 +35,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "pdfjs-dist": "^3.1.81"
-  }
+  "devDependencies": {}
 }
