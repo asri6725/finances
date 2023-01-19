@@ -1,9 +1,10 @@
 import './App.css';
+import CsvUploader from './CsvUploader';
 
 function App() {
   return (
     <div className="App">
-    Hello World!
+    <CsvUploader />
   </div>
   );
 }
