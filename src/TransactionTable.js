@@ -88,11 +88,11 @@ export default function TransactionTable(props) {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover>
-                      <TableCell align="right">{row[0]}</TableCell>
-                      <TableCell align="right">{row[1]}</TableCell>
-                      <TableCell align="right">{row[2]}</TableCell>
-                      <TableCell align="right">{row[3]}</TableCell>
+                    <TableRow hover key={index/10}>
+                      <TableCell key={'' + index*100+1}>{row[0]}</TableCell>
+                      <TableCell key={'' + index*100+2}>{row[1]}</TableCell>
+                      <TableCell key={'' + index*100+4}>{row[2]}</TableCell>
+                      <TableCell key={'' + index*100+3}>{row[3]}</TableCell>
                     </TableRow>
                   );
                 })}
