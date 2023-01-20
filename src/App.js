@@ -18,9 +18,8 @@ function App() {
         <CSVReader pull_data={pull_data}/> 
       </div>
       <div className='Output'>
-        <p>{fileData}</p>
         <div className='TransactionTable'>
-          <TransactionTable fileData = {fileData}/>
+          <TransactionTable fileData = {fileData} containsHeading={true}/>
         </div>
       </div>
   </div>
