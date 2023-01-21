@@ -86,10 +86,27 @@ export default function CSVReader(props) {
     DEFAULT_REMOVE_HOVER_COLOR
   );
 
+  const processResults = (results) => {
+    var tmp = []
+    for(var i=0; i<results.length; i++){
+      if (results[i].length > 1){
+        tmp.push({
+          'id':i,
+          'date':results[i][0],
+          'amount':results[i][1],
+          'description':results[i][2],
+          'balance':results[i][3],
+      });
+      }
+    }
+    console.log('tmp:',tmp)
+    props.pull_data(tmp);
+  }
+
   return (
     <CSVReader
       onUploadAccepted={(results) => {
-        props.pull_data(results)
+      processResults(results.data);
         setZoneHover(false);
       }}
       onDragOver={(event) => {
