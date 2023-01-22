@@ -19,11 +19,6 @@ const columns = [
     headerName: 'Description',
     flex:1,
     minWidth:350,
-  },
-  {
-    field: 'balance',
-    headerName: 'Balance',
-    flex:1,
   }
 ];
 

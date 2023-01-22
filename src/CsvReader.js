@@ -1,4 +1,5 @@
 import React, { useState, CSSProperties } from 'react';
+import moment from 'moment';
 
 import {
   useCSVReader,
@@ -86,20 +87,73 @@ export default function CSVReader(props) {
     DEFAULT_REMOVE_HOVER_COLOR
   );
 
-  const determineStructure = (result) => {
-    
+  /*
+    Determine the structure of csv. I need - Date, Amount, Description.
+    Date - location is determined by moment js.
+    Amount - This is the column of csv with max amounts of negative transactions - $-1 coffee, etc
+    Description - Is not a number.
+
+    Check whether the first row contains headings - to skip it. If there is a number in the first row, it doens't contain headings.
+  */
+
+  const determineStructure = (data) => {
+    var headings = {}
+    var numbers = {}
+    var results = data.slice(0,Math.max(6, data.length));
+    results.map( (result, index) => {
+      var contains_headings = true;
+      if(index===0){
+        for(var i=0; i<result.length; i++){
+          if(parseFloat(result[i]) !== NaN){
+            contains_headings = false;
+          }
+        }
+      }
+      if(contains_headings){
+        results = data.slice(1,Math.max(6, data.length));
+      }
+
+      for(var i=0; i<result.length; i++){
+        if(moment(result[i], 'DD/MM/YYYY', true).isValid()){
+          headings.date = i;
+        }
+        else if(parseFloat(result[i]) !== NaN){
+          if(parseFloat(result[i]) < 0){
+            if(!numbers[i]){
+              numbers[i] = 1;
+            }
+            else{
+              numbers[i] += 1;
+            }
+          }
+        }
+        else if(parseFloat(result[i]) === NaN){
+          console.log("got here")
+          headings.description = i;
+        }
+      }
+    })
+    var max_key = 0;
+    for(const[key, value] of Object.entries(numbers)){
+      if(value > numbers[max_key]){
+        max_key = key;
+      }
+    }
+    headings.amount = max_key;
+    console.log(headings)
+    return headings;
   }
 
   const processResults = (results) => {
     var tmp = []
+    var headings = determineStructure(results);
     for(var i=0; i<results.length; i++){
       if (results[i].length > 1){
         tmp.push({
           'id':i,
-          'date':results[i][0],
-          'amount':results[i][1],
-          'description':results[i][2],
-          'balance':results[i][3],
+          'date':moment(results[i][headings.date], 'DD/MM/YYYY', true),
+          'amount':parseFloat(results[i][headings.amount]),
+          'description':results[i][headings.description]
       });
       }
     }

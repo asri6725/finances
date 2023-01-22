@@ -9,11 +9,13 @@ function App() {
   const [fileData, setFileData] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [spliced, setSpliced] = useState(false)
+  
   const pull_data = (data) => {
     setFileData(data)
     setTableData(fileData)
     console.log('filedata:', fileData)
   }
+  
   const shiftData = (event) => {
     if(fileData.length !== 0 && event.target.checked && spliced === false){
       console.log('checked removing first row')
@@ -28,6 +30,7 @@ function App() {
       console.log(tableData.length)
     }
   }
+  
   return (
     <div className="App">
       <div className='Title'>
