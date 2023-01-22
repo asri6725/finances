@@ -45,6 +45,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.5",
     "@mui/x-data-grid": "^5.17.20",
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "moment": "^2.29.4"
   }
 }

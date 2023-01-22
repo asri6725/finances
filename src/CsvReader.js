@@ -86,6 +86,10 @@ export default function CSVReader(props) {
     DEFAULT_REMOVE_HOVER_COLOR
   );
 
+  const determineStructure = (result) => {
+    
+  }
+
   const processResults = (results) => {
     var tmp = []
     for(var i=0; i<results.length; i++){
