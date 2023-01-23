@@ -94,64 +94,75 @@ export default function CSVReader(props) {
     Description - Is not a number.
 
     Check whether the first row contains headings - to skip it. If there is a number in the first row, it doens't contain headings.
+
+    Regex to check for +/- XXX.XX numbers - ^[+-][0-9]*.[0-9][0-9]$
+    Regex to check for atleast one alphabet - [a-zA-Z]
+    Regex to check for just alphabets - ^[a-zA-Z]*$
   */
 
   const determineStructure = (data) => {
     var headings = {}
     var numbers = {}
-    var results = data.slice(0,Math.max(6, data.length));
-    results.map( (result, index) => {
-      var contains_headings = true;
-      if(index===0){
-        for(var i=0; i<result.length; i++){
-          if(parseFloat(result[i]) !== NaN){
-            contains_headings = false;
+    const alphanumeric_regex = new RegExp('[a-zA-Z]');
+    const number_regex = new RegExp('^[+-][0-9]*.[0-9][0-9]$');
+    var results = data.slice(0,Math.min(6, data.length));
+    results.map( (result) => {
+    result.map ( (value, index) => {
+      console.log(value)
+      if(moment(value, 'DD/MM/YYYY', true).isValid()){
+        console.log("got to date: ", index)
+        headings.date = index;
+      }
+      else if(number_regex.test(value)){
+        if(parseFloat(value) < 0){
+          if(!numbers[index]){
+            numbers[index] = 1;
+          }
+          else{
+            numbers[index] += 1;
           }
         }
       }
-      if(contains_headings){
-        results = data.slice(1,Math.max(6, data.length));
-      }
-
-      for(var i=0; i<result.length; i++){
-        if(moment(result[i], 'DD/MM/YYYY', true).isValid()){
-          headings.date = i;
-        }
-        else if(parseFloat(result[i]) !== NaN){
-          if(parseFloat(result[i]) < 0){
-            if(!numbers[i]){
-              numbers[i] = 1;
-            }
-            else{
-              numbers[i] += 1;
-            }
-          }
-        }
-        else if(parseFloat(result[i]) === NaN){
-          console.log("got here")
-          headings.description = i;
-        }
+      else if(alphanumeric_regex.test(value)){
+        headings.description = index;
       }
     })
-    var max_key = 0;
+  })
+    console.log('numbers:',numbers)
+    var max_key = Object.keys(numbers)[0];
     for(const[key, value] of Object.entries(numbers)){
       if(value > numbers[max_key]){
         max_key = key;
       }
     }
     headings.amount = max_key;
-    console.log(headings)
+    console.log('headings:',headings)
     return headings;
   }
 
   const processResults = (results) => {
-    var tmp = []
+
+    // shift if first row contains headings
+    var contains_headings = true;
+    for(var j=0; j<results[0].length; j++){
+      if(!new RegExp('^[a-zA-Z ]*$').test(results[0][j])){
+        contains_headings = false;
+      }
+    }
+    if(contains_headings){
+      results.shift();
+    }
+
+    console.log(results);
     var headings = determineStructure(results);
+    var tmp = []
+
     for(var i=0; i<results.length; i++){
       if (results[i].length > 1){
         tmp.push({
           'id':i,
           'date':moment(results[i][headings.date], 'DD/MM/YYYY', true),
+          // 'date':results[i][headings.date],
           'amount':parseFloat(results[i][headings.amount]),
           'description':results[i][headings.description]
       });
