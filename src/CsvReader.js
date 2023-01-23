@@ -165,6 +165,7 @@ export default function CSVReader(props) {
       }
     }
     props.pull_data(tmp);
+    results = {}
   }
 
   return (

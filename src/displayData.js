@@ -22,7 +22,7 @@ const columns = [
   }
 ];
 
-export default function TransactionTable(props) {
+export function DisplayTable(props) {
   const rows = props.fileData;
  
   return (
