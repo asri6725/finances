@@ -107,28 +107,26 @@ export default function CSVReader(props) {
     const number_regex = new RegExp('^[+-][0-9]*.[0-9][0-9]$');
     var results = data.slice(0,Math.min(6, data.length));
     results.map( (result) => {
-    result.map ( (value, index) => {
-      console.log(value)
-      if(moment(value, 'DD/MM/YYYY', true).isValid()){
-        console.log("got to date: ", index)
-        headings.date = index;
-      }
-      else if(number_regex.test(value)){
-        if(parseFloat(value) < 0){
-          if(!numbers[index]){
-            numbers[index] = 1;
-          }
-          else{
-            numbers[index] += 1;
+      result.map ( (value, index) => {
+        if(moment(value, 'DD/MM/YYYY', true).isValid()){
+          headings.date = index;
+        }
+        else if(number_regex.test(value)){
+          if(parseFloat(value) < 0){
+            if(!numbers[index]){
+              numbers[index] = 1;
+            }
+            else{
+              numbers[index] += 1;
+            }
           }
         }
-      }
-      else if(alphanumeric_regex.test(value)){
-        headings.description = index;
-      }
+        else if(alphanumeric_regex.test(value)){
+          headings.description = index;
+        }
+      })
     })
-  })
-    console.log('numbers:',numbers)
+
     var max_key = Object.keys(numbers)[0];
     for(const[key, value] of Object.entries(numbers)){
       if(value > numbers[max_key]){
@@ -136,7 +134,6 @@ export default function CSVReader(props) {
       }
     }
     headings.amount = max_key;
-    console.log('headings:',headings)
     return headings;
   }
 
@@ -153,7 +150,6 @@ export default function CSVReader(props) {
       results.shift();
     }
 
-    console.log(results);
     var headings = determineStructure(results);
     var tmp = []
 
@@ -168,7 +164,6 @@ export default function CSVReader(props) {
       });
       }
     }
-    console.log('tmp:',tmp)
     props.pull_data(tmp);
   }
 
