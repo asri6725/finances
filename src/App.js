@@ -1,7 +1,7 @@
 import './App.css';
 import CSVReader from './CsvReader';
 import React, { useState } from 'react';
-import {DisplayTable} from './displayData';
+import {DisplayTable} from './DisplayData';
 
 function App() {
   const [fileData, setFileData] = useState([]);
