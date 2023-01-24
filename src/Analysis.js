@@ -1,8 +1,10 @@
-export function calculate_frequency(data){
-    var arr = []
-    data.map( (data_point) => {
-        arr.push(data_point.date);
+
+export function calculate_frequency(dates){
+    var frequency = 0
+    dates.map( (date, index) => {
+        frequency += date.diff(dates[Math.min(index+1, dates.length-1)], 'days', true);
     })
+    return (frequency/dates.length)
 }
 
 export function cummulative_amount(data){
@@ -30,7 +32,9 @@ export function display_cummulative_amount(data){
                 'id':index,
                 // 'date':results[i][headings.date],
                 'amount':value.amount,
-                'description':key
+                'description':key,
+                'count':value.date.length,
+                'frequency':calculate_frequency(value.date)
             });
         index += 1;
     }
@@ -50,6 +54,16 @@ export function cummulative_amount_headings(){
           field: 'amount',
           headerName: 'Amount',
           type: 'number',flex:1,
-        }
+        },
+        {
+            field: 'count',
+            headerName: 'Count',
+            type: 'number',flex:1,
+          },
+          {
+            field: 'frequency',
+            headerName: 'Frequency (days)',
+            type: 'number',flex:1,
+          }
       ];
 }

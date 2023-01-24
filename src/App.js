@@ -31,10 +31,10 @@ function App() {
       </div>
       <div className='output'>
         <div className='transactionTable'>
-          <DisplayTable rows = {fileData} columns = {fileDataHeadings}/>
+          <DisplayTable rows = {fileData} columns = {fileDataHeadings} title={"Your parsed transactions."}/>
         </div>
         <div className='insights'>
-          <DisplayTable rows = {cummulativeData} columns = {cummulativeHeadings} />
+          <DisplayTable rows = {cummulativeData} columns = {cummulativeHeadings} title={"Your cummulative transactions."} />
         </div>
       </div>
   </div>
