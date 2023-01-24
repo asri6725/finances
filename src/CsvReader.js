@@ -80,6 +80,28 @@ const styles = {
   } ,
 };
 
+export function getFileDataHeadings(){
+  return [
+    { field: 'id', headerName: 'ID',flex:1, },
+    {
+      field: 'date',
+      headerName: 'Date',
+      type: 'date',flex:1,
+    },
+    {
+      field: 'description',
+      headerName: 'Description',
+      flex:1,
+      minWidth:350,
+    },
+    {
+      field: 'amount',
+      headerName: 'Amount',
+      type: 'number',flex:1,
+    }
+  ];
+}
+
 export default function CSVReader(props) {
   const { CSVReader } = useCSVReader();
   const [zoneHover, setZoneHover] = useState(false);

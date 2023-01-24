@@ -1,14 +1,25 @@
 import './App.css';
-import CSVReader from './CsvReader';
+import CSVReader, {getFileDataHeadings} from './CsvReader';
 import React, { useState } from 'react';
 import {DisplayTable} from './DisplayData';
+import {display_cummulative_amount , cummulative_amount_headings} from './Analysis';
 
 function App() {
   const [fileData, setFileData] = useState([]);
+  const [fileDataHeadings] = useState(getFileDataHeadings());
+  const [cummulativeData, setCummulativeData] = useState([]);
+  const [cummulativeHeadings] = useState(cummulative_amount_headings());
   
   const pull_data = (data) => {
     setFileData(data);
+    setCummulativeData(display_cummulative_amount(data));
   }
+
+  // useEffect(() =>{
+  //   var data = cumulative_amount(fileData);
+  //   console.log("Data updated, cummulative data:", data);
+  //   setCummulativeData(data);
+  // })
   
   return (
     <div className='app'>
@@ -20,10 +31,10 @@ function App() {
       </div>
       <div className='output'>
         <div className='transactionTable'>
-          <DisplayTable fileData = {fileData}/>
+          <DisplayTable rows = {fileData} columns = {fileDataHeadings}/>
         </div>
         <div className='insights'>
-
+          <DisplayTable rows = {cummulativeData} columns = {cummulativeHeadings} />
         </div>
       </div>
   </div>
