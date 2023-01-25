@@ -1,7 +1,7 @@
 import './App.css';
 import CSVReader, {getFileDataHeadings} from './CsvReader';
 import React, { useState } from 'react';
-import {DisplayTable} from './DisplayData';
+import {DisplayTable, DisplayBarGraph} from './DisplayData';
 import {display_cummulative_amount , cummulative_amount_headings} from './Analysis';
 
 function App() {
@@ -24,17 +24,20 @@ function App() {
   return (
     <div className='app'>
       <div className='title'>
-        <h1> Finances </h1>
+        <h1> Spending Analysis </h1>
       </div>
       <div className='importData'> 
         <CSVReader pull_data={pull_data}/> 
       </div>
       <div className='output'>
         <div className='transactionTable'>
-          <DisplayTable rows = {fileData} columns = {fileDataHeadings} title={"Your parsed transactions."}/>
+          <DisplayTable rows = {fileData} columns = {fileDataHeadings} title={"Your parsed transactions"}/>
         </div>
-        <div className='insights'>
-          <DisplayTable rows = {cummulativeData} columns = {cummulativeHeadings} title={"Your cummulative transactions."} />
+        <div className='simplifiedFindings'>
+          <DisplayTable rows = {cummulativeData} columns = {cummulativeHeadings} title={"Your cummulative transactions"} />
+        </div>
+        <div className='oneGraph'>
+          <DisplayBarGraph rows = {[]} />
         </div>
       </div>
   </div>

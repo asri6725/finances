@@ -34,7 +34,8 @@ export function display_cummulative_amount(data){
                 'amount':value.amount,
                 'description':key,
                 'count':value.date.length,
-                'frequency':calculate_frequency(value.date)
+                'frequency':calculate_frequency(value.date),
+                'category':'food'
             });
         index += 1;
     }
@@ -64,6 +65,11 @@ export function cummulative_amount_headings(){
             field: 'frequency',
             headerName: 'Frequency (days)',
             type: 'number',flex:1,
+          },
+          {
+            field: 'category',
+            headerName: 'Category (needs to be verified)',
+            type: 'string',flex:1, editable:true
           }
       ];
 }
