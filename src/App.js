@@ -37,7 +37,7 @@ function App() {
           <DisplayTable rows = {cummulativeData} columns = {cummulativeHeadings} title={"Your cummulative transactions"} />
         </div>
         <div className='oneGraph'>
-          <DisplayBarGraph rows = {[]} />
+          {/* <DisplayBarGraph rows = {[]} /> */}
         </div>
       </div>
   </div>
