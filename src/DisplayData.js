@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import './DisplayData.css';
 import Paper from '@mui/material/Paper';
-
+import BarChart from 'react-bar-chart';
 
 export function DisplayTable(props) { 
   return (
@@ -24,9 +24,15 @@ export function DisplayTable(props) {
 }
 
 export function DisplayBarGraph(props){
+  const data = props.rows;
+  const margin = {top: 20, right: 20, bottom: 30, left: 40};
   return (
     <Paper>
-    
+    <BarChart ylabel='Quantity'
+                  width={200}
+                  height={500}
+                  margin={margin}
+                  data={data}/>
   </Paper>
   );
 }

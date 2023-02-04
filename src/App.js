@@ -2,17 +2,19 @@ import './App.css';
 import CSVReader, {getFileDataHeadings} from './CsvReader';
 import React, { useState } from 'react';
 import {DisplayTable, DisplayBarGraph} from './DisplayData';
-import {display_cummulative_amount , cummulative_amount_headings} from './Analysis';
+import {display_cummulative_amount , cummulative_amount_headings, display_cummulative_amount_bar} from './Analysis';
 
 function App() {
   const [fileData, setFileData] = useState([]);
   const [fileDataHeadings] = useState(getFileDataHeadings());
   const [cummulativeData, setCummulativeData] = useState([]);
   const [cummulativeHeadings] = useState(cummulative_amount_headings());
+  const [cummulativeAmountBar, setCummulativeAmountBar] = useState([]);
   
   const pull_data = (data) => {
     setFileData(data);
     setCummulativeData(display_cummulative_amount(data));
+    setCummulativeAmountBar(display_cummulative_amount_bar(cummulativeData));
   }
 
   // useEffect(() =>{
@@ -37,7 +39,7 @@ function App() {
           <DisplayTable rows = {cummulativeData} columns = {cummulativeHeadings} title={"Your cummulative transactions"} />
         </div>
         <div className='oneGraph'>
-          
+          <DisplayBarGraph rows = {cummulativeAmountBar} />
         </div>
       </div>
   </div>

@@ -73,3 +73,16 @@ export function cummulative_amount_headings(){
           }
       ];
 }
+
+export function display_cummulative_amount_bar(data){
+    console.log(data);
+    var result = []
+    for(const[key, value] of Object.entries(data)){
+        result.push({
+                // 'date':results[i][headings.date],
+                'text':value.category,
+                'value':value.amount
+            });
+        }
+    return result;
+}
