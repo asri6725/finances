@@ -3,12 +3,7 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import './DisplayData.css';
 import Paper from '@mui/material/Paper';
-import {
-  ArgumentAxis,
-  ValueAxis,
-  Chart,
-  BarSeries,
-} from '@devexpress/dx-react-chart-material-ui';
+
 
 export function DisplayTable(props) { 
   return (
@@ -31,13 +26,7 @@ export function DisplayTable(props) {
 export function DisplayBarGraph(props){
   return (
     <Paper>
-    <Chart
-      data={props.rows}
-    >
-      <ArgumentAxis />
-      <ValueAxis />
-      <BarSeries valueField="amount" argumentField="category" />
-    </Chart>
+    
   </Paper>
   );
 }
