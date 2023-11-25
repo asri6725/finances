@@ -25,7 +25,7 @@ export function DisplayTable(props) {
 
 export function DisplayBarGraph(props){
   const data = props.rows;
-  const margin = {top: 20, right: 20, bottom: 30, left: 40};
+  const margin = {top: 20, right: 50, bottom: 30, left: 100};
   return (
     <Paper>
     <BarChart ylabel='Quantity'

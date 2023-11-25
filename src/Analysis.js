@@ -1,3 +1,4 @@
+var graph = {}
 
 export function calculate_frequency(dates){
     var frequency = 0
@@ -37,6 +38,12 @@ export function display_cummulative_amount(data){
                 'frequency':calculate_frequency(value.date),
                 'category':'food'
             });
+        if(!graph.food){
+            graph.food = value.amount;
+        }
+        else{
+            graph.food += value.amount;
+        }
         index += 1;
     }
     return result;
@@ -63,7 +70,7 @@ export function cummulative_amount_headings(){
           },
           {
             field: 'frequency',
-            headerName: 'Frequency (days)',
+            headerName: 'Frequency (every x days)',
             type: 'number',flex:1,
           },
           {
@@ -74,14 +81,13 @@ export function cummulative_amount_headings(){
       ];
 }
 
-export function display_cummulative_amount_bar(data){
-    console.log(data);
+export function display_cummulative_amount_bar(){
     var result = []
-    for(const[key, value] of Object.entries(data)){
+    for(const[key, value] of Object.entries(graph)){
         result.push({
                 // 'date':results[i][headings.date],
-                'text':value.category,
-                'value':value.amount
+                'text':key,
+                'value':value
             });
         }
     return result;

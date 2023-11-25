@@ -14,7 +14,7 @@ function App() {
   const pull_data = (data) => {
     setFileData(data);
     setCummulativeData(display_cummulative_amount(data));
-    setCummulativeAmountBar(display_cummulative_amount_bar(cummulativeData));
+    setCummulativeAmountBar(display_cummulative_amount_bar());
   }
 
   // useEffect(() =>{
