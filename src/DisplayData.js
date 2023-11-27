@@ -6,6 +6,19 @@ import Paper from '@mui/material/Paper';
 import BarChart from 'react-bar-chart';
 
 export function DisplayTable(props) { 
+  const processRowUpdate = (newRow) => {
+    const updatedRow = { ...newRow, isNew: false };
+    var tmp = [...props.rows]
+    for(let i=0; i<tmp.length; i++){
+      if(tmp[i].id === updatedRow.id){
+        tmp[i] = updatedRow;
+        break;
+      }
+    }
+    //handle send data to api
+    props.updateCummulativeData(tmp)
+    return updatedRow;
+  };
   return (
     <div className='DisplayTable'>
       <h3>{props.title}</h3>
@@ -17,6 +30,8 @@ export function DisplayTable(props) {
           rowsPerPageOptions={[5]}
           disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
+          processRowUpdate={processRowUpdate}
+          onProcessRowUpdateError={(error) => {console.log(error)}}
         />
       </Box>
     </div>

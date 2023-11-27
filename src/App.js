@@ -14,15 +14,8 @@ function App() {
   const pull_data = (data) => {
     setFileData(data);
     setCummulativeData(display_cummulative_amount(data));
-    setCummulativeAmountBar(display_cummulative_amount_bar());
   }
 
-  // useEffect(() =>{
-  //   var data = cumulative_amount(fileData);
-  //   console.log("Data updated, cummulative data:", data);
-  //   setCummulativeData(data);
-  // })
-  
   return (
     <div className='app'>
       <div className='title'>
@@ -36,7 +29,15 @@ function App() {
           <DisplayTable rows = {fileData} columns = {fileDataHeadings} title={"Your parsed transactions"}/>
         </div>
         <div className='simplifiedFindings'>
-          <DisplayTable rows = {cummulativeData} columns = {cummulativeHeadings} title={"Your cummulative transactions"} />
+          <DisplayTable 
+            rows = {cummulativeData} 
+            columns = {cummulativeHeadings} 
+            title={"Your cummulative transactions"} 
+            updateCummulativeData={updatedData => {
+              setCummulativeData(updatedData);
+              setCummulativeAmountBar(display_cummulative_amount_bar(updatedData));
+            }}
+            />
         </div>
         <div className='oneGraph'>
           <DisplayBarGraph rows = {cummulativeAmountBar} />
