@@ -34,7 +34,7 @@ export function display_cummulative_amount(data){
                 'description':key,
                 'count':value.date.length,
                 'frequency':calculate_frequency(value.date),
-                'category': ''
+                'category': 'other'
             });
         index += 1;
     }
@@ -67,7 +67,7 @@ export function cummulative_amount_headings(){
           },
           {
             field: 'category',
-            headerName: 'Category (needs to be verified)',
+            headerName: 'Category',
             type: 'string',flex:1, editable:true
           }
       ];
@@ -90,7 +90,7 @@ export function display_cummulative_amount_bar(cummulative_data_with_category){
         result.push({
                 // 'date':results[i][headings.date],
                 'text':key,
-                'value':value
+                'value':Math.abs(value)
             });
         }
     return result;

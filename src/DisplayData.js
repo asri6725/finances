@@ -1,9 +1,9 @@
 import * as React from 'react';
+import './DisplayData.css';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import './DisplayData.css';
+import { BarChart } from '@mui/x-charts/BarChart';
 import Paper from '@mui/material/Paper';
-import BarChart from 'react-bar-chart';
 
 export function DisplayTable(props) { 
   const processRowUpdate = (newRow) => {
@@ -39,15 +39,35 @@ export function DisplayTable(props) {
 }
 
 export function DisplayBarGraph(props){
-  const data = props.rows;
-  const margin = {top: 20, right: 50, bottom: 30, left: 100};
-  return (
-    <Paper>
-    <BarChart ylabel='Quantity'
-                  width={200}
-                  height={500}
-                  margin={margin}
-                  data={data}/>
-  </Paper>
-  );
+  var rows = [];
+  var columns = [];
+
+  if(props.rows.length !== undefined){
+    props.rows.forEach(element => {
+      console.log(element)
+      rows.push(element.text)
+      columns.push(element.value)
+    });
+    var width = 500
+    var height = 300
+    if(rows.length > 6){
+      width = 800
+      height=400
+    }
+    if(rows.length > 10){
+      width = 1600
+      height = 600
+    }
+    return (
+      <Paper>
+        <BarChart
+        width={width}
+        height={height}
+        series={[{ data: columns}]}
+        xAxis={[{ data: rows, scaleType: 'band' }]}
+      />
+      </Paper>
+    );
+  }
+  
 }

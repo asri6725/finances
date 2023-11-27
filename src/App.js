@@ -9,7 +9,7 @@ function App() {
   const [fileDataHeadings] = useState(getFileDataHeadings());
   const [cummulativeData, setCummulativeData] = useState([]);
   const [cummulativeHeadings] = useState(cummulative_amount_headings());
-  const [cummulativeAmountBar, setCummulativeAmountBar] = useState([]);
+  const [cummulativeAmountBar, setCummulativeAmountBar] = useState({});
   
   const pull_data = (data) => {
     setFileData(data);
