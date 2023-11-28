@@ -32,3 +32,8 @@ Displays the parsed data.
 Set of functions that check for the following things - 
 1. Cummulative spending based on description.
 2. Frequence of spending based on description.
+
+### TODO
+
+1. Update this docco with done items.
+2. Implement deleting parts of userInput.

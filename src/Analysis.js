@@ -36,14 +36,14 @@ export function display_cummulative_amount(data){
                 'description':key,
                 'count':value.date.length,
                 'frequency':calculate_frequency(value.date),
-                'category': 'other'
+                'category': 'Other'
             });
         index += 1;
     }
     return result;
 }
 
-export function cummulative_amount_headings(){
+export function cummulative_amount_headings(userInput){
     return [
         { field: 'id', headerName: 'ID',flex:1, },
         {
@@ -70,7 +70,8 @@ export function cummulative_amount_headings(){
           {
             field: 'category',
             headerName: 'Category',
-            type: 'string',flex:1, editable:true
+            type: 'singleSelect',flex:1, editable:true,
+            valueOptions: Array.from(new Set(userInput))
           }
       ];
 }
