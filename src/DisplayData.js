@@ -22,12 +22,12 @@ export function DisplayTable(props) {
   return (
     <div className='DisplayTable'>
       <h3>{props.title}</h3>
-      <Box sx={{ height: 400, width: '100%' }}>
+      <Box sx={{ height: 650, width: '100%' }}>
         <DataGrid
           rows={props.rows}
           columns={props.columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={10}
+          rowsPerPageOptions={[5, 10, 15]}
           disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
           processRowUpdate={processRowUpdate}
@@ -44,7 +44,6 @@ export function DisplayBarGraph(props){
 
   if(props.rows.length !== undefined){
     props.rows.forEach(element => {
-      console.log(element)
       rows.push(element.text)
       columns.push(element.value)
     });
@@ -53,10 +52,6 @@ export function DisplayBarGraph(props){
     if(rows.length > 6){
       width = 800
       height=400
-    }
-    if(rows.length > 10){
-      width = 1600
-      height = 600
     }
     return (
       <Paper>
@@ -70,4 +65,21 @@ export function DisplayBarGraph(props){
     );
   }
   
+}
+
+export function DisplaySimpleTable(props) { 
+  return (
+    <div className='DisplayTable'>
+      <h3>{props.title}</h3>
+      <Box sx={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={props.rows}
+          columns={props.columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          disableSelectionOnClick
+        />
+      </Box>
+    </div>
+  );
 }
