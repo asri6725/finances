@@ -1,7 +1,7 @@
 import './App.css';
 import CSVReader, {getFileDataHeadings} from './CsvReader';
 import React, { useState } from 'react';
-import {DisplayTable, DisplayBarGraph} from './DisplayData';
+import { DisplaySimpleTable, DisplayTable, DisplayBarGraph} from './DisplayData';
 import {display_cummulative_amount , cummulative_amount_headings, display_cummulative_amount_bar} from './Analysis';
 
 function App() {
@@ -9,20 +9,13 @@ function App() {
   const [fileDataHeadings] = useState(getFileDataHeadings());
   const [cummulativeData, setCummulativeData] = useState([]);
   const [cummulativeHeadings] = useState(cummulative_amount_headings());
-  const [cummulativeAmountBar, setCummulativeAmountBar] = useState([]);
+  const [cummulativeAmountBar, setCummulativeAmountBar] = useState({});
   
   const pull_data = (data) => {
     setFileData(data);
     setCummulativeData(display_cummulative_amount(data));
-    setCummulativeAmountBar(display_cummulative_amount_bar(cummulativeData));
   }
 
-  // useEffect(() =>{
-  //   var data = cumulative_amount(fileData);
-  //   console.log("Data updated, cummulative data:", data);
-  //   setCummulativeData(data);
-  // })
-  
   return (
     <div className='app'>
       <div className='title'>
@@ -33,10 +26,18 @@ function App() {
       </div>
       <div className='output'>
         <div className='transactionTable'>
-          <DisplayTable rows = {fileData} columns = {fileDataHeadings} title={"Your parsed transactions"}/>
+          <DisplaySimpleTable rows = {fileData} columns = {fileDataHeadings} title={"Your parsed transactions"}/>
         </div>
         <div className='simplifiedFindings'>
-          <DisplayTable rows = {cummulativeData} columns = {cummulativeHeadings} title={"Your cummulative transactions"} />
+          <DisplayTable 
+            rows = {cummulativeData} 
+            columns = {cummulativeHeadings} 
+            title={"Your cummulative transactions"} 
+            updateCummulativeData={updatedData => {
+              setCummulativeData(updatedData);
+              setCummulativeAmountBar(display_cummulative_amount_bar(updatedData));
+            }}
+            />
         </div>
         <div className='oneGraph'>
           <DisplayBarGraph rows = {cummulativeAmountBar} />
