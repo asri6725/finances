@@ -1,5 +1,5 @@
 import './App.css';
-import CSVReader, {getFileDataHeadings} from './CsvReader';
+import CSVReader, {getFileDataHeadings} from './csvReader/CsvReader';
 import React, { useState } from 'react';
 import { DisplaySimpleTable, DisplayTable, DisplayBarGraph} from './DisplayData';
 import {display_cummulative_amount , cummulative_amount_headings, display_cummulative_amount_bar} from './Analysis';

@@ -2,6 +2,7 @@ export function calculate_frequency(dates){
     var frequency = 0
     dates.map( (date, index) => {
         frequency += date.diff(dates[Math.min(index+1, dates.length-1)], 'days', true);
+        return 0;
     })
     return (frequency/dates.length)
 }
@@ -18,6 +19,7 @@ export function cummulative_amount(data){
             result[data_point.description].amount += data_point.amount;
             result[data_point.description].date.push(data_point.date);
         }}
+        return 0;
     })
     return result;
 }

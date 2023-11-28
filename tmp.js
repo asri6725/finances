@@ -24,6 +24,6 @@
         value - amount
     }
 
-    TODO: Add up amount for each category
+    TODO: Add up amount for each category - done
 
 */
