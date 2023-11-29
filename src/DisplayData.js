@@ -5,10 +5,43 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { BarChart } from '@mui/x-charts/BarChart';
 import Paper from '@mui/material/Paper';
+import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+
+function cummulative_amount_headings(userInput){
+  return [
+      { field: 'id', headerName: 'ID',flex:1, },
+      {
+          field: 'description',
+          headerName: 'Description',
+          flex:1,
+          minWidth:350,
+        },
+      {
+        field: 'amount',
+        headerName: 'Amount',
+        type: 'number',flex:1,
+      },
+      {
+          field: 'count',
+          headerName: 'Count',
+          type: 'number',flex:1,
+        },
+        {
+          field: 'frequency',
+          headerName: 'Frequency (every x days)',
+          type: 'number',flex:1,
+        },
+        {
+          field: 'category',
+          headerName: 'Category',
+          type: 'singleSelect',flex:1, editable:true,
+          valueOptions: Array.from(new Set(userInput))
+        }
+    ];
+}
 
 export function DisplayTable(props) { 
   const processRowUpdate = (newRow) => {
@@ -30,7 +63,7 @@ export function DisplayTable(props) {
       <Box sx={{ height: 650, width: '100%' }}>
         <DataGrid
           rows={props.rows}
-          columns={props.columns}
+          columns={cummulative_amount_headings(props.userInput)}
           pageSize={10}
           rowsPerPageOptions={[5, 10, 15]}
           disableSelectionOnClick
@@ -90,7 +123,7 @@ export function DisplaySimpleTable(props) {
 }
 
 export function ButtonGroupComponent(props) {
-  var buttonNames = props.buttonNames
+  var buttonNames = props.userInput
   const [inputText, setInputText] = useState('');
 
   const handleInputChange = (event) => {
@@ -101,7 +134,15 @@ export function ButtonGroupComponent(props) {
     props.updateUserInput(inputText);
     setInputText('');
   };
+  
+  const chipSelection = (event, label) => {
+    if(event.type === "click"){
 
+    }
+    if(event.type === "delete" && label !== "Other"){
+      props.removeUserInput(label);
+    }
+  }
 
   var chunkedButtonNames = [];
   const chunkSize = 7;
@@ -116,21 +157,28 @@ export function ButtonGroupComponent(props) {
       {chunkedButtonNames.map((chunk, index) => (
         <Grid container spacing={2} key={index}>
           <Grid item xs={12}>
-            <ButtonGroup
-              variant="outlined1"
-              aria-label={`button group ${index + 1}`}
-            >
+            <div className="chip-container">
               {chunk.map((buttonName, idx) => (
-                <Button disabled key={idx}>{buttonName}</Button>
+                <Chip 
+                label={buttonName}
+                onClick={(event) => chipSelection(event, buttonName)}
+                onDelete={() => chipSelection({ type: 'delete' }, buttonName)}
+                key={idx}
+                />
               ))}
-            </ButtonGroup>
+            </div>
           </Grid>
         </Grid>
       ))}
     </>
     <br></br>
-      <TextField id="add-input" label="Add input" variant="standard" value={inputText} onChange={handleInputChange} />
-      <Button onClick={handleButtonClick}>+</Button>
+    <div className="button-container">
+      <TextField id="add-input" label="Add category" variant="outlined" value={inputText} 
+      onChange={handleInputChange} 
+      style={{ flex: '1', marginRight: '8px' }}
+      />
+      <Button onClick={handleButtonClick} style={{ height: '100%' }}>+</Button>
+    </div>
     </div>
   );
 };

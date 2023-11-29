@@ -43,39 +43,6 @@ export function display_cummulative_amount(data){
     return result;
 }
 
-export function cummulative_amount_headings(userInput){
-    return [
-        { field: 'id', headerName: 'ID',flex:1, },
-        {
-            field: 'description',
-            headerName: 'Description',
-            flex:1,
-            minWidth:350,
-          },
-        {
-          field: 'amount',
-          headerName: 'Amount',
-          type: 'number',flex:1,
-        },
-        {
-            field: 'count',
-            headerName: 'Count',
-            type: 'number',flex:1,
-          },
-          {
-            field: 'frequency',
-            headerName: 'Frequency (every x days)',
-            type: 'number',flex:1,
-          },
-          {
-            field: 'category',
-            headerName: 'Category',
-            type: 'singleSelect',flex:1, editable:true,
-            valueOptions: Array.from(new Set(userInput))
-          }
-      ];
-}
-
 export function display_cummulative_amount_bar(cummulative_data_with_category){
     var result = []
     var graph = {}

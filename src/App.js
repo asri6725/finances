@@ -2,7 +2,7 @@ import './App.css';
 import CSVReader, {getFileDataHeadings} from './csvReader/CsvReader';
 import React, { useState } from 'react';
 import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent} from './DisplayData';
-import {display_cummulative_amount , cummulative_amount_headings, display_cummulative_amount_bar} from './Analysis';
+import {display_cummulative_amount, display_cummulative_amount_bar} from './Analysis';
 
 function App() {
   const [fileData, setFileData] = useState([]);
@@ -12,11 +12,18 @@ function App() {
 
   const [userInput, setUserInput] = useState(['Home', 'Home - mortgage', 'Home - rent', 'Food', 'Food - grocery', 'Food - eat out', 'Food - beer',
   'Transport', 'Transport - personal', 'Transport - public', 'Transport - repair', 'Other'])
-  const [cummulativeHeadings, setCummulativeHeadings] = useState(cummulative_amount_headings(userInput));
   
   const pull_data = (data) => {
     setFileData(data);
     setCummulativeData(display_cummulative_amount(data));
+  }
+
+  const updateUserInput = (data) => {
+    setUserInput(prevUserInput => Array.from(new Set([...prevUserInput, data]))); 
+  };
+
+  const removeUserInput = (data) => {
+    setUserInput(prevUserInput => prevUserInput.filter(item => item !== data));
   }
 
   return (
@@ -34,7 +41,7 @@ function App() {
         <div className='simplifiedFindings'>
           <DisplayTable 
             rows = {cummulativeData} 
-            columns = {cummulativeHeadings} 
+            userInput = {userInput} 
             title={"Your cummulative transactions"} 
             updateCummulativeData={updatedData => {
               setCummulativeData(updatedData);
@@ -42,11 +49,11 @@ function App() {
             }}
             />
           <p>You can use this table to categorise your transactions.</p>
-          <ButtonGroupComponent buttonNames={userInput} 
+          <ButtonGroupComponent userInput={userInput} 
           updateUserInput = { updatedData => {
-            setUserInput(prevUserInput => [...prevUserInput, updatedData]); 
-            setCummulativeHeadings(cummulative_amount_headings(userInput));
+            updateUserInput(updatedData)
             }} 
+          removeUserInput = {removeUserInput}
             />
         </div>
         <div className='oneGraph'>
