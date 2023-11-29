@@ -3,6 +3,7 @@ import CSVReader, {getFileDataHeadings} from './csvReader/CsvReader';
 import React, { useState } from 'react';
 import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent} from './DisplayData';
 import {display_cummulative_amount, display_cummulative_amount_bar} from './Analysis';
+import CSVDownloader from './csvReader/CSVDownloader';
 import { Button } from '@mui/material';
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
               setCummulativeAmountBar(display_cummulative_amount_bar(updatedData));
             }}
             />
+            <CSVDownloader rows={cummulativeData} />
           <p>You can use this table to categorise your transactions.</p> <p>At the moment, you have the following categories to choose from. Update them as you wish ^-^</p>
           <ButtonGroupComponent 
           userInput={userInput} 
