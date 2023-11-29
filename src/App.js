@@ -3,6 +3,7 @@ import CSVReader, {getFileDataHeadings} from './csvReader/CsvReader';
 import React, { useState } from 'react';
 import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent} from './DisplayData';
 import {display_cummulative_amount, display_cummulative_amount_bar} from './Analysis';
+import { Button } from '@mui/material';
 
 function App() {
   const [fileData, setFileData] = useState([]);
@@ -14,6 +15,7 @@ function App() {
   'Transport', 'Transport - personal', 'Transport - public', 'Transport - repair', 'Other']);
 
   const [userInputSelected, setUserInputSelected] = useState ([false, undefined]);
+  const [displayFileInfo, setDisplayFileInfo] = useState(true)
   
   const pull_data = (data) => {
     setFileData(data);
@@ -34,12 +36,19 @@ function App() {
         <h1> Spending Analysis </h1>
       </div>
       <div className='importData'> 
-        <CSVReader pull_data={pull_data}/> 
+        {displayFileInfo ? (
+          <>
+            <CSVReader pull_data={pull_data} setDisplayFileInfo={setDisplayFileInfo}/> 
+            <div className='transactionTable'>
+              <DisplaySimpleTable rows={fileData} columns={fileDataHeadings} title={"Your parsed transactions"}/>
+            </div>
+            <Button variant="contained" onClick={() => setDisplayFileInfo(false)}>Hide this stuff</Button>
+          </>
+        ) : (
+          <Button variant="contained" onClick={() => setDisplayFileInfo(true)}>Display file info or upload new file</Button>
+        )}
       </div>
       <div className='output'>
-        <div className='transactionTable'>
-          <DisplaySimpleTable rows = {fileData} columns = {fileDataHeadings} title={"Your parsed transactions"}/>
-        </div>
         <div className='simplifiedFindings'>
           <DisplayTable 
             title={"Your cummulative transactions"} 

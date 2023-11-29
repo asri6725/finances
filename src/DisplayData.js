@@ -43,7 +43,7 @@ function cummulative_amount_headings(userInput){
     ];
 }
 
-export function DisplayTable(props) { 
+export function DisplayTable(props) {
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow, isNew: false };
     var tmp = [...props.rows]
@@ -69,9 +69,9 @@ export function DisplayTable(props) {
     <div className='DisplayTable'>
       <h3>{props.title}</h3>
       {props.userInputSelected[0] ? <p>Category selection is active, please just click on the rows to categorise them.</p> : 
-      <p>Category selection is inactive. Please double click the category for each row to categorise, or select a category from under the table to activate quick categpry selection.</p>}
+      <><p>Category selection is inactive. Please double click the category for each row to categorise,</p><p>or select a category from under the table to activate quick categpry selection.</p></>}
 
-      <Box sx={{ height: 650, width: '100%' }}>
+      <Box sx={{ height:850, width: '100%' }}>
         <DataGrid
           rows={props.rows}
           columns={cummulative_amount_headings(props.userInput)}
