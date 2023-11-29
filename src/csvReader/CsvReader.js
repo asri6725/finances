@@ -128,6 +128,7 @@ export default function CSVReader(props) {
     }
     props.pull_data(tmp);
     results = {}
+    props.setDisplayFileInfo(false)
   }
 
   return (

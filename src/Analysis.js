@@ -36,43 +36,11 @@ export function display_cummulative_amount(data){
                 'description':key,
                 'count':value.date.length,
                 'frequency':calculate_frequency(value.date),
-                'category': 'other'
+                'category': 'Other'
             });
         index += 1;
     }
     return result;
-}
-
-export function cummulative_amount_headings(){
-    return [
-        { field: 'id', headerName: 'ID',flex:1, },
-        {
-            field: 'description',
-            headerName: 'Description',
-            flex:1,
-            minWidth:350,
-          },
-        {
-          field: 'amount',
-          headerName: 'Amount',
-          type: 'number',flex:1,
-        },
-        {
-            field: 'count',
-            headerName: 'Count',
-            type: 'number',flex:1,
-          },
-          {
-            field: 'frequency',
-            headerName: 'Frequency (every x days)',
-            type: 'number',flex:1,
-          },
-          {
-            field: 'category',
-            headerName: 'Category',
-            type: 'string',flex:1, editable:true
-          }
-      ];
 }
 
 export function display_cummulative_amount_bar(cummulative_data_with_category){

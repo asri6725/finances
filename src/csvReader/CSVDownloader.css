@@ -1,0 +1,21 @@
+.SecondaryButton{
+    font-size: 5px;
+    font-weight: 100;
+    background-color: #0068bd;
+    text-align: center;
+    width: 150px;
+    border: none;
+    padding: 1% 1%;
+    transition: 0.3s;
+    text-decoration: none;
+    font-weight: lighter;
+    color: #FFFFFF;
+    border: 2px solid #e7e7e7; 
+    font-size:120%;
+    padding:1% 1%;
+}
+.SecondaryButton:hover{
+    background-color: #FFFFFF;
+    color: #0068bd;
+    cursor: pointer;
+}
