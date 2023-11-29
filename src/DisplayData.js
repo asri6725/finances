@@ -57,9 +57,20 @@ export function DisplayTable(props) {
     props.updateCummulativeData(tmp)
     return updatedRow;
   };
+
+  const handleRowClick = (row) => {
+    if(props.userInputSelected[0]){
+      row.row.category = props.userInputSelected[1];
+      processRowUpdate(row.row);
+    }
+  }
+
   return (
     <div className='DisplayTable'>
       <h3>{props.title}</h3>
+      {props.userInputSelected[0] ? <p>Category selection is active, please just click on the rows to categorise them.</p> : 
+      <p>Category selection is inactive. Please double click the category for each row to categorise, or select a category from under the table to activate quick categpry selection.</p>}
+
       <Box sx={{ height: 650, width: '100%' }}>
         <DataGrid
           rows={props.rows}
@@ -70,6 +81,7 @@ export function DisplayTable(props) {
           experimentalFeatures={{ newEditingApi: true }}
           processRowUpdate={processRowUpdate}
           onProcessRowUpdateError={(error) => {console.log(error)}}
+          onRowClick={handleRowClick}
         />
       </Box>
     </div>
@@ -125,6 +137,7 @@ export function DisplaySimpleTable(props) {
 export function ButtonGroupComponent(props) {
   var buttonNames = props.userInput
   const [inputText, setInputText] = useState('');
+  const [selection, setSelection] = useState([false, undefined])
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
@@ -137,7 +150,18 @@ export function ButtonGroupComponent(props) {
   
   const chipSelection = (event, label) => {
     if(event.type === "click"){
-
+      if(selection[0] === false){
+        props.setUserInputSelected([true, label]);
+        setSelection([true, label]);
+      }
+      else if(selection[0] === true && label !== selection[1]){
+        props.setUserInputSelected([true, label]);
+        setSelection([true, label]);
+      }
+      else if(selection[0] === true && label === selection[1]){
+        props.setUserInputSelected([false, undefined]);
+        setSelection([false, undefined]);
+      }
     }
     if(event.type === "delete" && label !== "Other"){
       props.removeUserInput(label);
@@ -163,6 +187,9 @@ export function ButtonGroupComponent(props) {
                 label={buttonName}
                 onClick={(event) => chipSelection(event, buttonName)}
                 onDelete={() => chipSelection({ type: 'delete' }, buttonName)}
+                variant={
+                  selection[0] === true && selection[1] === buttonName ? 'default' : 'outlined'
+                }
                 key={idx}
                 />
               ))}

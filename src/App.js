@@ -11,7 +11,9 @@ function App() {
   const [cummulativeAmountBar, setCummulativeAmountBar] = useState({}); // bar graph data based on user input to cummulative data.
 
   const [userInput, setUserInput] = useState(['Home', 'Home - mortgage', 'Home - rent', 'Food', 'Food - grocery', 'Food - eat out', 'Food - beer',
-  'Transport', 'Transport - personal', 'Transport - public', 'Transport - repair', 'Other'])
+  'Transport', 'Transport - personal', 'Transport - public', 'Transport - repair', 'Other']);
+
+  const [userInputSelected, setUserInputSelected] = useState ([false, undefined]);
   
   const pull_data = (data) => {
     setFileData(data);
@@ -40,20 +42,24 @@ function App() {
         </div>
         <div className='simplifiedFindings'>
           <DisplayTable 
+            title={"Your cummulative transactions"} 
             rows = {cummulativeData} 
             userInput = {userInput} 
-            title={"Your cummulative transactions"} 
+            userInputSelected = {userInputSelected}
             updateCummulativeData={updatedData => {
               setCummulativeData(updatedData);
               setCummulativeAmountBar(display_cummulative_amount_bar(updatedData));
             }}
             />
-          <p>You can use this table to categorise your transactions.</p>
-          <ButtonGroupComponent userInput={userInput} 
+          <p>You can use this table to categorise your transactions.</p> <p>At the moment, you have the following categories to choose from. Update them as you wish ^-^</p>
+          <ButtonGroupComponent 
+          userInput={userInput} 
           updateUserInput = { updatedData => {
             updateUserInput(updatedData)
             }} 
           removeUserInput = {removeUserInput}
+          userInputSelected = {userInputSelected}
+          setUserInputSelected = {setUserInputSelected}
             />
         </div>
         <div className='oneGraph'>
