@@ -91,7 +91,6 @@ function App() {
         <div className='oneGraph'>
           <DisplayBarGraph rows = {cummulativeAmountBar} />
         </div>
-        <Button variant='contained'>Buy me coffee?</Button>
       </div>
   </div>
   );
