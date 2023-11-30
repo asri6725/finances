@@ -2,7 +2,7 @@
   "name": "finances",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://asri6725.github.io/finances",
+  "homepage": "https://asri6725.github.io/spending-analysis",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
