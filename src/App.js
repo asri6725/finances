@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent} from './DisplayData';
 import {display_cummulative_amount, display_cummulative_amount_bar} from './Analysis';
 import CSVDownloader from './csvReader/CSVDownloader';
+import Review from './Review';
 import { Button } from '@mui/material';
+import Alert from '@mui/material/Alert';
 
 function App() {
   const [fileData, setFileData] = useState([]);
@@ -16,7 +18,8 @@ function App() {
   'Transport', 'Transport - personal', 'Transport - public', 'Transport - repair', 'Other']);
 
   const [userInputSelected, setUserInputSelected] = useState ([false, undefined]);
-  const [displayFileInfo, setDisplayFileInfo] = useState(true)
+  const [displayFileInfo, setDisplayFileInfo] = useState(true);
+  const [displayInfo, setDisplayInfo] = useState(true);
   
   const pull_data = (data) => {
     setFileData(data);
@@ -35,6 +38,9 @@ function App() {
     <div className='app'>
       <div className='title'>
         <h1> Spending Analysis </h1>
+      </div>
+      <div className='Review'>
+        <Review />
       </div>
       <div className='importData'> 
         {displayFileInfo ? (
@@ -62,7 +68,16 @@ function App() {
             }}
             />
             <CSVDownloader rows={cummulativeData} />
-          <p>You can use this table to categorise your transactions.</p> <p>At the moment, you have the following categories to choose from. Update them as you wish ^-^</p>
+            <div>
+              { displayInfo ? (<>
+              <br/><br/>
+              <Alert severity="info">You can use this table to categorise your transactions.<br/>At the moment, you have the following categories to choose from. Update them as you wish ^-^
+              <br/><br/>
+              <Button variant='outlined' onClick={()=>setDisplayInfo(false)}>Got it!</Button> </Alert>
+              </>
+              ) : <></>}
+              <br/><br/>
+            </div>
           <ButtonGroupComponent 
           userInput={userInput} 
           updateUserInput = { updatedData => {
@@ -76,6 +91,7 @@ function App() {
         <div className='oneGraph'>
           <DisplayBarGraph rows = {cummulativeAmountBar} />
         </div>
+        <Button variant='contained'>Buy me coffee?</Button>
       </div>
   </div>
   );

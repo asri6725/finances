@@ -9,6 +9,7 @@ import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import Alert from '@mui/material/Alert';
 
 function cummulative_amount_headings(userInput){
   return [
@@ -68,8 +69,8 @@ export function DisplayTable(props) {
   return (
     <div className='DisplayTable'>
       <h3>{props.title}</h3>
-      {props.userInputSelected[0] ? <p>Category selection is active, please just click on the rows to categorise them.</p> : 
-      <><p>Category selection is inactive. Please double click the category for each row to categorise,</p><p>or select a category from under the table to activate quick categpry selection.</p></>}
+      {props.userInputSelected[0] ? <Alert severity="success">Category selection is active, just click on the rows to categorise them as {props.userInputSelected[1]}.</Alert> : 
+      <Alert severity="info">Category selection is inactive. Please double click the category section on each row to categorise, or select a category from under the table to activate quick category selection.</Alert>}
 
       <Box sx={{ height:850, width: '100%' }}>
         <DataGrid
