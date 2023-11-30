@@ -76,8 +76,8 @@ export function DisplayTable(props) {
         <DataGrid
           rows={props.rows}
           columns={cummulative_amount_headings(props.userInput)}
-          pageSize={10}
-          rowsPerPageOptions={[5, 10, 15]}
+          pageSize={14}
+          rowsPerPageOptions={[14]}
           disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
           processRowUpdate={processRowUpdate}

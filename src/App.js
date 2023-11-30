@@ -18,12 +18,15 @@ function App() {
   'Transport', 'Transport - personal', 'Transport - public', 'Transport - repair', 'Other']);
 
   const [userInputSelected, setUserInputSelected] = useState ([false, undefined]);
+  
   const [displayFileInfo, setDisplayFileInfo] = useState(true);
   const [displayInfo, setDisplayInfo] = useState(true);
+  const [displayInfo1, setDisplayInfo1] = useState(false);
   
   const pull_data = (data) => {
     setFileData(data);
     setCummulativeData(display_cummulative_amount(data));
+    setDisplayInfo1(true);
   }
 
   const updateUserInput = (data) => {
@@ -57,6 +60,9 @@ function App() {
       </div>
       <div className='output'>
         <div className='simplifiedFindings'>
+          {displayInfo1 ? <><br /><Alert severity="success" onClose={() => {setDisplayInfo1(false)}}>Reduced data to categorise by {((cummulativeData.length/fileData.length)*100).toFixed(1)}%.</Alert><br /> </> :
+          <></>}
+          
           <DisplayTable 
             title={"Your cummulative transactions"} 
             rows = {cummulativeData} 
@@ -71,7 +77,7 @@ function App() {
             <div>
               { displayInfo ? (<>
               <br/><br/>
-              <Alert severity="info">You can use this table to categorise your transactions.<br/>At the moment, you have the following categories to choose from. Update them as you wish ^-^
+              <Alert onClose={() => {setDisplayInfo(false)}} severity="info">You can use this table to categorise your transactions.<br/>At the moment, you have the following categories to choose from. Update them as you wish ^-^
               <br/><br/>
               <Button variant='outlined' onClick={()=>setDisplayInfo(false)}>Got it!</Button> </Alert>
               </>

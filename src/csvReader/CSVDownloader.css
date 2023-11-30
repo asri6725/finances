@@ -1,18 +1,18 @@
 .SecondaryButton{
-    font-size: 5px;
+    font-size: 17px;
     font-weight: 100;
     background-color: #0068bd;
     text-align: center;
-    width: 150px;
+    width: 130px;
+    height: fit-content;
     border: none;
     padding: 1% 1%;
     transition: 0.3s;
     text-decoration: none;
-    font-weight: lighter;
     color: #FFFFFF;
     border: 2px solid #e7e7e7; 
-    font-size:120%;
     padding:1% 1%;
+    border-radius: 5px;
 }
 .SecondaryButton:hover{
     background-color: #FFFFFF;

@@ -4,7 +4,7 @@ export function calculate_frequency(dates){
         frequency += date.diff(dates[Math.min(index+1, dates.length-1)], 'days', true);
         return 0;
     })
-    return (frequency/dates.length)
+    return (frequency/dates.length).toFixed(0);
 }
 
 export function cummulative_amount(data){
