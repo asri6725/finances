@@ -7,6 +7,9 @@ import {
   lightenDarkenColor,
   formatFileSize,
 } from 'react-papaparse';
+import { Button } from '@mui/material';
+
+import demoData from '../constants/demo.json';
 
 
 const DEFAULT_REMOVE_HOVER_COLOR = '#A01919';
@@ -132,6 +135,7 @@ export default function CSVReader(props) {
   }
 
   return (
+    <div>
     <CSVReader
       onUploadAccepted={(results) => {
       processResults(results.data);
@@ -197,5 +201,7 @@ export default function CSVReader(props) {
         </>
       )}
     </CSVReader>
+    <Button variant="contained" onClick={() =>{ processResults(demoData); props.setdisplayDemoUPloadedInfo(true)}}>Demo Data</Button>
+    </div>
   );
 }

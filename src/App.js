@@ -22,6 +22,7 @@ function App() {
   const [displayFileInfo, setDisplayFileInfo] = useState(true);
   const [displayInfo, setDisplayInfo] = useState(true);
   const [displayInfo1, setDisplayInfo1] = useState(false);
+  const [displayDemoUPloadedInfo, setdisplayDemoUPloadedInfo] = useState(false);
   
   const pull_data = (data) => {
     setFileData(data);
@@ -48,7 +49,7 @@ function App() {
       <div className='importData'> 
         {displayFileInfo ? (
           <>
-            <CSVReader pull_data={pull_data} setDisplayFileInfo={setDisplayFileInfo}/> 
+            <CSVReader pull_data={pull_data} setDisplayFileInfo={setDisplayFileInfo} setdisplayDemoUPloadedInfo={setdisplayDemoUPloadedInfo} /> 
             <div className='transactionTable'>
               <DisplaySimpleTable rows={fileData} columns={fileDataHeadings} title={"Your parsed transactions"}/>
             </div>
@@ -57,6 +58,9 @@ function App() {
         ) : (
           <Button variant="contained" onClick={() => setDisplayFileInfo(true)}>Display file info or upload new file</Button>
         )}
+        {displayDemoUPloadedInfo ? (
+          <><br /><br /><Alert severity="warning" onClose={() => {setdisplayDemoUPloadedInfo(false)}}>Populated all tables with demo data. Have a look around!</Alert></>
+        ):<></>}
       </div>
       <div className='output'>
         <div className='simplifiedFindings'>
