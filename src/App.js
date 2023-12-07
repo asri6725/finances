@@ -59,7 +59,7 @@ function App() {
           <Button variant="contained" onClick={() => setDisplayFileInfo(true)}>Display file info or upload new file</Button>
         )}
         {displayDemoUPloadedInfo ? (
-          <><br /><br /><Alert severity="warning" onClose={() => {setdisplayDemoUPloadedInfo(false)}}>Populated all tables with demo data. Have a look around!</Alert></>
+          <><br /><br /><Alert severity="warning" onClose={() => {setdisplayDemoUPloadedInfo(false)}}>Populated all tables with demo data.<br /> Have a look around!<br /><br /> <br />The reader looks for columns:<br />1. 'description' containing text and spaces<br />2. 'transactions' numbers begining with +/- ending with .XX<br /> 3.'date' string containg XX/XX/XXXX<br /><br /> All of this happens automatically, please tell me if it mucks up. </Alert></>
         ):<></>}
       </div>
       <div className='output'>
