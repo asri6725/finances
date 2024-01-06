@@ -53,7 +53,7 @@ function App() {
             <CSVReader pull_data={pull_data} setDisplayFileInfo={setDisplayFileInfo} setdisplayDemoUPloadedInfo={setdisplayDemoUPloadedInfo} setUploaded={setUploaded}/> 
             <div>
               <br/><br/>
-              <Alert severity="info">The reader looks for the following fields in the CSV file:<br /><br />1. 'description': containing text and spaces<br />2. 'transactions': numbers begining with +/- ending with .XX . As this is a spending tool, only outgoing amounts (starting with -) are filtered for consideration.<br /> 3.'date': string with XX/XX/XXXX format<br /><br /> All of this happens automatically, please tell me if it mucks up. </Alert>
+              <Alert severity="info">The reader looks for the following fields in the CSV file:<br /><br />1. 'description': containing text and spaces<br />2. 'transactions': numbers begining with +/- ending with .XX . As this is a spending tool, only outgoing amounts (starting with -) are filtered for consideration.<br /> 3. 'date': string with XX/XX/XXXX format<br /><br /> All of this happens automatically, please tell me if it mucks up. </Alert>
               <br/><br/>
             </div>
             <div className='transactionTable'>
