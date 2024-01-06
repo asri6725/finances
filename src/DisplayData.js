@@ -10,6 +10,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import SendIcon from '@mui/icons-material/Send';
+import InputAdornment from '@mui/material/InputAdornment';
 
 function cummulative_amount_headings(userInput){
   return [
@@ -160,7 +163,7 @@ export function ButtonGroupComponent(props) {
     setInputText(event.target.value);
   };
 
-  const handleButtonClick = () => {
+  const handleSendClick = () => {
     props.updateUserInput(inputText);
     setInputText('');
   };
@@ -196,8 +199,8 @@ export function ButtonGroupComponent(props) {
     <div>
     <>
       {chunkedButtonNames.map((chunk, index) => (
-        <Grid container spacing={2} key={index}>
-          <Grid item xs={12}>
+        <Grid container spacing={1} >
+          <Grid item spacing={30}>
             <div className="chip-container">
               {chunk.map((buttonName, idx) => (
                 <Chip 
@@ -217,11 +220,24 @@ export function ButtonGroupComponent(props) {
     </>
     <br></br>
     <div className="button-container">
-      <TextField id="add-input" label="Add category" variant="outlined" value={inputText} 
-      onChange={handleInputChange} 
-      style={{ flex: '1', marginRight: '8px' }}
+      <TextField 
+            id="add-input" 
+            label="Add category" 
+            variant="outlined" 
+            value={inputText} 
+            onChange={handleInputChange} 
+            style={{ flex: '1', marginRight: '8px' }}
+            alignItems='center'
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleSendClick}>
+                    <SendIcon style={{ color: 'primary' }}/>
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
       />
-      <Button onClick={handleButtonClick} style={{ height: '100%' }}>+</Button>
     </div>
     </div>
   );
