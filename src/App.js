@@ -23,6 +23,7 @@ function App() {
   const [displayInfo, setDisplayInfo] = useState(true);
   const [displayInfo1, setDisplayInfo1] = useState(false);
   const [displayDemoUPloadedInfo, setdisplayDemoUPloadedInfo] = useState(false);
+  const [uploaded, setUploaded] = useState(false)
   
   const pull_data = (data) => {
     setFileData(data);
@@ -49,19 +50,30 @@ function App() {
       <div className='importData'> 
         {displayFileInfo ? (
           <>
-            <CSVReader pull_data={pull_data} setDisplayFileInfo={setDisplayFileInfo} setdisplayDemoUPloadedInfo={setdisplayDemoUPloadedInfo} /> 
-            <div className='transactionTable'>
-              <DisplaySimpleTable rows={fileData} columns={fileDataHeadings} title={"Your parsed transactions"}/>
+            <CSVReader pull_data={pull_data} setDisplayFileInfo={setDisplayFileInfo} setdisplayDemoUPloadedInfo={setdisplayDemoUPloadedInfo} setUploaded={setUploaded}/> 
+            <div>
+              <br/><br/>
+              <Alert severity="info">The reader looks for the following fields in the CSV file:<br /><br />1. 'description': containing text and spaces<br />2. 'transactions': numbers begining with +/- ending with .XX . As this is a spending tool, only outgoing amounts (starting with -) are filtered for consideration.<br /> 3.'date': string with XX/XX/XXXX format<br /><br /> All of this happens automatically, please tell me if it mucks up. </Alert>
+              <br/><br/>
             </div>
-            <Button variant="contained" onClick={() => setDisplayFileInfo(false)}>Hide this stuff</Button>
+            <div className='transactionTable'>
+              {
+                uploaded ? <>
+                  <DisplaySimpleTable rows={fileData} columns={fileDataHeadings} title={"Your parsed transactions"}/> 
+                  <Button variant="contained" onClick={() => setDisplayFileInfo(false)}>Hide this stuff</Button>
+                  </>
+                : <></>
+             }
+            </div>
           </>
         ) : (
           <Button variant="contained" onClick={() => setDisplayFileInfo(true)}>Display file info or upload new file</Button>
         )}
         {displayDemoUPloadedInfo ? (
-          <><br /><br /><Alert severity="warning" onClose={() => {setdisplayDemoUPloadedInfo(false)}}>Populated all tables with demo data. Have a look around!</Alert></>
+          <><br /><br /><Alert severity="warning" onClose={() => {setdisplayDemoUPloadedInfo(false)}}>Populated all tables with demo data.<br /> Have a look around!<br /></Alert></>
         ):<></>}
       </div>
+      {uploaded ? 
       <div className='output'>
         <div className='simplifiedFindings'>
           {displayInfo1 ? <><br /><Alert severity="success" onClose={() => {setDisplayInfo1(false)}}>Reduced data to categorise by {((cummulativeData.length/fileData.length)*100).toFixed(1)}%.</Alert><br /> </> :
@@ -102,6 +114,7 @@ function App() {
           <DisplayBarGraph rows = {cummulativeAmountBar} />
         </div>
       </div>
+      :<></>}
   </div>
   );
 }

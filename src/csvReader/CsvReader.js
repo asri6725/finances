@@ -8,6 +8,7 @@ import {
   formatFileSize,
 } from 'react-papaparse';
 import { Button } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import demoData from '../constants/demo.json';
 
@@ -49,6 +50,7 @@ export default function CSVReader(props) {
   const [removeHoverColor, setRemoveHoverColor] = useState(
     DEFAULT_REMOVE_HOVER_COLOR
   );
+  const [loading, setLoading] = useState(false);
 
   /*
     Determine the structure of csv. I need - Date, Amount, Description.
@@ -131,10 +133,18 @@ export default function CSVReader(props) {
     }
     props.pull_data(tmp);
     results = {}
-    props.setDisplayFileInfo(false)
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false);
+      props.setDisplayFileInfo(false);
+      props.setUploaded(true);
+    }, 3000);
+    
   }
 
   return (
+    <>
+    { loading ? <CircularProgress /> : 
     <div>
     <CSVReader
       onUploadAccepted={(results) => {
@@ -203,5 +213,7 @@ export default function CSVReader(props) {
     </CSVReader>
     <Button variant="contained" onClick={() =>{ processResults(demoData); props.setdisplayDemoUPloadedInfo(true)}}>Demo Data</Button>
     </div>
+            }
+            </>
   );
 }
