@@ -45,6 +45,21 @@ function cummulative_amount_headings(userInput){
 }
 
 export function DisplayTable(props) {
+  const [pageSize, setPageSize] = useState(14);
+  const [height, setHeight] = useState(850)
+  const handlePageSizeChange = (newPageSize) => {
+    setPageSize(newPageSize);
+    if(newPageSize === 7){
+      setHeight(500)
+    }
+    if(newPageSize === 14){
+      setHeight(850)
+    }
+    if(newPageSize === 21){
+      setHeight(1220)
+    }
+  };
+
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow, isNew: false };
     var tmp = [...props.rows]
@@ -72,12 +87,13 @@ export function DisplayTable(props) {
       {props.userInputSelected[0] ? <Alert severity="success">Category selection is active, just click on the rows to categorise them as {props.userInputSelected[1]}.</Alert> : 
       <Alert severity="info">Category selection is inactive. Please double click the category section on each row to categorise, or select a category from under the table to activate quick category selection.</Alert>}
 
-      <Box sx={{ height:850, width: '100%' }}>
+      <Box sx={{ height:height, width: '100%' }}>
         <DataGrid
           rows={props.rows}
           columns={cummulative_amount_headings(props.userInput)}
-          pageSize={14}
-          rowsPerPageOptions={[14]}
+          pageSize={pageSize}
+          onPageSizeChange={(newPageSize) => handlePageSizeChange(newPageSize)}
+          rowsPerPageOptions={[7,14,21]}
           disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
           processRowUpdate={processRowUpdate}
