@@ -45,8 +45,8 @@ function cummulative_amount_headings(userInput){
 }
 
 export function DisplayTable(props) {
-  const [pageSize, setPageSize] = useState(14);
-  const [height, setHeight] = useState(850)
+  const [pageSize, setPageSize] = useState(7);
+  const [height, setHeight] = useState(500)
   const handlePageSizeChange = (newPageSize) => {
     setPageSize(newPageSize);
     if(newPageSize === 7){
