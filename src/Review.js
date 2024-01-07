@@ -57,7 +57,7 @@ const Review = () => {
       {!displayReview && (
         <div style={floatingStyle} onMouseEnter={() => setShowCloseButton(true)} onMouseLeave={() => setShowCloseButton(false)}>
         <Button variant="contained" onClick={() => setDisplayReview(true)}>
-          Quick Review?
+          Feedback
         </Button>
         {showCloseButton && (
             <span style={closeButtonStyle} onClick={handleRemoveFloatingDiv}>

@@ -138,7 +138,7 @@ export default function CSVReader(props) {
       setLoading(false);
       props.setDisplayFileInfo(false);
       props.setUploaded(true);
-    }, 3000);
+    }, 1000);
     
   }
 
