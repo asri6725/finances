@@ -60,7 +60,7 @@ export function display_cummulative_amount_bar(cummulative_data_with_category){
         result.push({
                 // 'date':results[i][headings.date],
                 'text':key,
-                'value':Math.abs(value)
+                'value':Math.abs(value).toFixed(2)
             });
         }
     return result;

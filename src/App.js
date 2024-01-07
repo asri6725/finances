@@ -1,7 +1,7 @@
 import './App.css';
 import CSVReader, {getFileDataHeadings} from './csvReader/CsvReader';
 import React, { useState } from 'react';
-import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent} from './DisplayData';
+import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent, DisplayCategories} from './DisplayData';
 import {display_cummulative_amount, display_cummulative_amount_bar} from './Analysis';
 import CSVDownloader from './csvReader/CSVDownloader';
 import Review from './Review';
@@ -113,6 +113,9 @@ function App() {
         <div className='oneGraph'>
           <DisplayBarGraph rows = {cummulativeAmountBar} />
         </div>
+        <div>
+        <DisplayCategories rows = {cummulativeAmountBar} title="Categories" />
+          </div>
       </div>
       :<></>}
   </div>

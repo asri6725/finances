@@ -13,6 +13,7 @@ import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import SendIcon from '@mui/icons-material/Send';
 import InputAdornment from '@mui/material/InputAdornment';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 function cummulative_amount_headings(userInput){
   return [
@@ -242,3 +243,33 @@ export function ButtonGroupComponent(props) {
     </div>
   );
 };
+
+export function DisplayCategories(props){
+  return (
+    <div className='DisplayTable'>
+      {props.rows.length > 0 ? 
+      <>
+      <h3>{props.title}</h3>
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Category</TableCell>
+            <TableCell>Amount</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {props.rows.map((row, index) => (
+            <TableRow key={index}>
+              <TableCell>{row.text}</TableCell>
+              <TableCell>{row.value}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </>
+  :<></>}
+  </div>
+  );
+} 
