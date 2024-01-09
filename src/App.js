@@ -41,7 +41,7 @@ function App() {
   return (
     <div className='app'>
       <div className='title'>
-        <h1> Spending Analysis </h1>
+        <h1> Spend Tracker </h1>
       </div>
       <div className='Review'>
         <Review />
@@ -52,7 +52,7 @@ function App() {
             <CSVReader pull_data={pull_data} setDisplayFileInfo={setDisplayFileInfo} setdisplayDemoUPloadedInfo={setdisplayDemoUPloadedInfo} setUploaded={setUploaded}/> 
             <div>
               <br/><br/>
-              <Alert severity="info">The reader looks for the following fields in the CSV file by looking at its text:<br /><br />1. 'description': containing text and spaces.<br />2. 'transactions': numbers begining with +/- ending with .XX . As this is a spending tool, only outgoing amounts (starting with -) are filtered for consideration.<br /> 3. 'date': string with XX/XX/XXXX format.<br />The headings are ignored to reduce dependency on the banks format.<br /><br /> All of this happens automatically, and there is no manual way for users to specify these fields. Please tell me if there are any issues using the feedback. </Alert>
+              <Alert severity="info">The reader looks for the following fields in the CSV file by looking at its text:<br /><br />1. 'description': containing text and spaces.<br />2. 'transactions': numbers begining with +/- ending with .XX . As this is a spending tool, only the outgoing amounts are filtered for further consideration.<br /> 3. 'date': string with XX/XX/XXXX format.<br />The headings are ignored to reduce dependency on the banks format.<br /><br /> All of this happens automatically, and there is no manual way for users to specify these fields. Please tell me if there are any issues using the feedback. </Alert>
               <br/><br/>
             </div>
             <div className='transactionTable'>
