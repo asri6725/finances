@@ -3,7 +3,6 @@ import { Button } from '@mui/material';
 
 const Review = () => {
   const [deleteReviewSection, setDeleteReviewSection] = useState(false);
-  const [displayReview, setDisplayReview] = useState(false);
   const [showCloseButton, setShowCloseButton] = useState(false);
 
   const floatingStyle = {
@@ -30,43 +29,25 @@ const Review = () => {
     setDeleteReviewSection(true);
   };
 
+  const redirectUsers = () => {
+    const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdNucdJgg0M6Zz8lLOHxMduVANcYROWhNYXyXCoUYmcOTa_qA/viewform';
+    window.open(googleFormUrl, '_blank');
+  }
+
   return (
     <>
     {deleteReviewSection ? <></> : (
     <>
-      {displayReview && (
-        <div
-          style={floatingStyle}
-        >
-          <iframe
-            title='google form feedback'
-            src="https://docs.google.com/forms/d/e/1FAIpQLSdNucdJgg0M6Zz8lLOHxMduVANcYROWhNYXyXCoUYmcOTa_qA/viewform?embedded=true"
-            width="640"
-            height="649"
-            frameBorder="0"
-            marginHeight="0"
-            marginWidth="0"
-          >
-            Loading…review
-          </iframe>
-          <br />
-          <Button variant="contained" onClick={() => setDisplayReview(false)}>
-            Collapse
-          </Button>
-        </div>
-      )}
-      {!displayReview && (
-        <div style={floatingStyle} onMouseEnter={() => setShowCloseButton(true)} onMouseLeave={() => setShowCloseButton(false)}>
-        <Button variant="contained" onClick={() => setDisplayReview(true)}>
-          Feedback
-        </Button>
-        {showCloseButton && (
-            <span style={closeButtonStyle} onClick={handleRemoveFloatingDiv}>
-              x
-            </span>
-          )}
-        </div>
-      )}
+      <div style={floatingStyle} onMouseEnter={() => setShowCloseButton(true)} onMouseLeave={() => setShowCloseButton(false)}>
+      <Button variant="contained" onClick={() => redirectUsers()}>
+        Feedback
+      </Button>
+      {showCloseButton && (
+          <span style={closeButtonStyle} onClick={handleRemoveFloatingDiv}>
+            x
+          </span>
+        )}
+      </div>
     </>
     )}
         </>
