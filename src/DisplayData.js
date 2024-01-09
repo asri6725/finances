@@ -1,19 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react';
 import './DisplayData.css';
-import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { BarChart } from '@mui/x-charts/BarChart';
-import Paper from '@mui/material/Paper';
-import Chip from '@mui/material/Chip';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
 import SendIcon from '@mui/icons-material/Send';
-import InputAdornment from '@mui/material/InputAdornment';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box, Paper, Chip, TextField, Grid, Alert, IconButton, InputAdornment, Button } from '@mui/material';
+import { useSnackbar } from 'notistack'; // If you're using a notification library
 
 function cummulative_amount_headings(userInput){
   return [
@@ -245,6 +237,20 @@ export function ButtonGroupComponent(props) {
 };
 
 export function DisplayCategories(props){
+  const { enqueueSnackbar } = useSnackbar(); // Snackbar notification hook (optional)
+
+  const copyTableToClipboard = () => {
+    const tableContent = props.rows.map(row => `${row.text}\t${row.value}`).join('\n');
+    navigator.clipboard.writeText(tableContent)
+      .then(() => {
+        enqueueSnackbar('Table content copied to clipboard!', { variant: 'success' }); // Optional: Show success message
+      })
+      .catch(err => {
+        console.error('Failed to copy:', err);
+        enqueueSnackbar('Failed to copy table content.', { variant: 'error' }); // Optional: Show error message
+      });
+  };
+
   return (
     <div className='DisplayTable'>
       {props.rows.length > 0 ? 
@@ -268,6 +274,9 @@ export function DisplayCategories(props){
         </TableBody>
       </Table>
     </TableContainer>
+    <Button variant="contained" color="primary" onClick={copyTableToClipboard}>
+        Copy Table to Clipboard
+    </Button>
     </>
   :<></>}
   </div>

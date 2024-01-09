@@ -47,6 +47,7 @@
     "@mui/x-charts": "^6.18.2",
     "@mui/x-data-grid": "^5.17.20",
     "gh-pages": "^5.0.0",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "notistack": "^3.0.1"
   }
 }

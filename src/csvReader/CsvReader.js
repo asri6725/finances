@@ -7,8 +7,7 @@ import {
   lightenDarkenColor,
   formatFileSize,
 } from 'react-papaparse';
-import { Button } from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
+import { CircularProgress, Button } from '@mui/material';
 
 import demoData from '../constants/demo.json';
 

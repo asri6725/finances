@@ -5,8 +5,7 @@ import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent
 import {display_cummulative_amount, display_cummulative_amount_bar} from './Analysis';
 import CSVDownloader from './csvReader/CSVDownloader';
 import Review from './Review';
-import { Button } from '@mui/material';
-import Alert from '@mui/material/Alert';
+import { Alert, Button } from '@mui/material';
 
 function App() {
   const [fileData, setFileData] = useState([]);
