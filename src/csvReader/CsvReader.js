@@ -70,12 +70,19 @@ export default function CSVReader(props) {
     const alphanumeric_regex = new RegExp('[a-zA-Z]');
     const number_regex = new RegExp('^[+-][0-9]*.[0-9][0-9]$');
     var results = data.slice(0,Math.min(6, data.length));
+    var date_formats = ['DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YYYY', 'DD-MM-YY']
+    var date_style;
     results.map( (result) => {
       result.map ( (value, index) => {
-        if(moment(value, 'DD/MM/YYYY', true).isValid()){
-          headings.date = index;
-        }
-        else if(number_regex.test(value)){
+        date_formats.map( (date) => {
+          console.log("checking if date:", value, moment(value, date, true).isValid());
+          if(moment(value, date, true).isValid()){
+            headings.date = index;
+            date_style = date;
+            console.log('date found:', value);
+          }
+        } )
+        if(number_regex.test(value)){
           if(parseFloat(value) < 0){
             if(!numbers[index]){
               numbers[index] = 1;
@@ -100,7 +107,8 @@ export default function CSVReader(props) {
       }
     }
     headings.amount = max_key;
-    return headings;
+    console.log("Final headings indices:",headings)
+    return [headings, date_style];
   }
 
   const processResults = (results) => {
@@ -116,14 +124,17 @@ export default function CSVReader(props) {
       results.shift();
     }
 
-    var headings = determineStructure(results);
+    var result = determineStructure(results)
+
+    var headings = result[0]
+    var date_style = result[1];
     var tmp = []
 
     for(var i=0; i<results.length; i++){
       if (results[i].length > 1){
         tmp.push({
           'id':i,
-          'date':moment(results[i][headings.date], 'DD/MM/YYYY', true),
+          'date':moment(results[i][headings.date], date_style, true),
           // 'date':results[i][headings.date],
           'amount':parseFloat(results[i][headings.amount]),
           'description':results[i][headings.description]
