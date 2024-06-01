@@ -7,7 +7,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box, Paper, Chip, TextField, Grid, Alert, IconButton, InputAdornment, Button } from '@mui/material';
 import { useSnackbar } from 'notistack'; // If you're using a notification library
 
-function cummulative_amount_headings(userInput){
+function cummulative_amount_headings(categories){
   return [
       { field: 'id', headerName: 'ID',flex:1, },
       {
@@ -35,7 +35,7 @@ function cummulative_amount_headings(userInput){
           field: 'category',
           headerName: 'Category',
           type: 'singleSelect',flex:1, editable:true,
-          valueOptions: Array.from(new Set(userInput))
+          valueOptions: Array.from(new Set(categories))
         }
     ];
 }
@@ -71,8 +71,8 @@ export function DisplayTable(props) {
   };
 
   const handleRowClick = (row) => {
-    if(props.userInputSelected[0]){
-      row.row.category = props.userInputSelected[1];
+    if(props.categoriesSelected[0]){
+      row.row.category = props.categoriesSelected[1];
       processRowUpdate(row.row);
     }
   }
@@ -80,13 +80,13 @@ export function DisplayTable(props) {
   return (
     <div className='DisplayTable'>
       <h3>{props.title}</h3>
-      {props.userInputSelected[0] ? <Alert severity="success">Category selection is active, just click on the rows to categorise them as {props.userInputSelected[1]}.</Alert> : 
+      {props.categoriesSelected[0] ? <Alert severity="success">Category selection is active, just click on the rows to categorise them as {props.categoriesSelected[1]}.</Alert> : 
       <Alert severity="info">Category selection is inactive. Please double click the category section on each row to categorise, or select a category from under the table to activate quick category selection.</Alert>}
 
       <Box sx={{ height:height, width: '100%' }}>
         <DataGrid
           rows={props.rows}
-          columns={cummulative_amount_headings(props.userInput)}
+          columns={cummulative_amount_headings(props.categories)}
           pageSize={pageSize}
           onPageSizeChange={(newPageSize) => handlePageSizeChange(newPageSize)}
           rowsPerPageOptions={[7,14,21]}
@@ -148,7 +148,7 @@ export function DisplaySimpleTable(props) {
 }
 
 export function ButtonGroupComponent(props) {
-  var buttonNames = props.userInput
+  var buttonNames = props.categories
   const [inputText, setInputText] = useState('');
   const [selection, setSelection] = useState([false, undefined])
 
@@ -157,27 +157,27 @@ export function ButtonGroupComponent(props) {
   };
 
   const handleSendClick = () => {
-    props.updateUserInput(inputText);
+    props.updatecategories(inputText);
     setInputText('');
   };
   
   const chipSelection = (event, label) => {
     if(event.type === "click"){
       if(selection[0] === false){
-        props.setUserInputSelected([true, label]);
+        props.setcategoriesSelected([true, label]);
         setSelection([true, label]);
       }
       else if(selection[0] === true && label !== selection[1]){
-        props.setUserInputSelected([true, label]);
+        props.setcategoriesSelected([true, label]);
         setSelection([true, label]);
       }
       else if(selection[0] === true && label === selection[1]){
-        props.setUserInputSelected([false, undefined]);
+        props.setcategoriesSelected([false, undefined]);
         setSelection([false, undefined]);
       }
     }
     if(event.type === "delete" && label !== "Other"){
-      props.removeUserInput(label);
+      props.removecategories(label);
     }
   }
 

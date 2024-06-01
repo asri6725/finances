@@ -13,10 +13,10 @@ function App() {
   const [cummulativeData, setCummulativeData] = useState([]);
   const [cummulativeAmountBar, setCummulativeAmountBar] = useState({}); // bar graph data based on user input to cummulative data.
 
-  const [userInput, setUserInput] = useState(['Home', 'Home - mortgage', 'Home - rent', 'Food', 'Food - grocery', 'Food - eat out', 'Food - beer',
+  const [categories, setcategories] = useState(['Home', 'Home - mortgage', 'Home - rent', 'Food', 'Food - grocery', 'Food - eat out', 'Food - beer',
   'Transport', 'Transport - personal', 'Transport - public', 'Transport - repair', 'Other']);
 
-  const [userInputSelected, setUserInputSelected] = useState ([false, undefined]);
+  const [categoriesSelected, setcategoriesSelected] = useState ([false, undefined]);
   
   const [displayFileInfo, setDisplayFileInfo] = useState(true);
   const [displayInfo, setDisplayInfo] = useState(true);
@@ -30,12 +30,12 @@ function App() {
     setDisplayInfo1(true);
   }
 
-  const updateUserInput = (data) => {
-    setUserInput(prevUserInput => Array.from(new Set([...prevUserInput, data]))); 
+  const updatecategories = (data) => {
+    setcategories(prevcategories => Array.from(new Set([...prevcategories, data]))); 
   };
 
-  const removeUserInput = (data) => {
-    setUserInput(prevUserInput => prevUserInput.filter(item => item !== data));
+  const removecategories = (data) => {
+    setcategories(prevcategories => prevcategories.filter(item => item !== data));
   }
 
   return (
@@ -81,8 +81,8 @@ function App() {
           <DisplayTable 
             title={"Your cummulative transactions"} 
             rows = {cummulativeData} 
-            userInput = {userInput} 
-            userInputSelected = {userInputSelected}
+            categories = {categories} 
+            categoriesSelected = {categoriesSelected}
             updateCummulativeData={updatedData => {
               setCummulativeData(updatedData);
               setCummulativeAmountBar(display_cummulative_amount_bar(updatedData));
@@ -100,13 +100,13 @@ function App() {
               <br/><br/>
             </div>
           <ButtonGroupComponent 
-          userInput={userInput} 
-          updateUserInput = { updatedData => {
-            updateUserInput(updatedData)
+          categories={categories} 
+          updatecategories = { updatedData => {
+            updatecategories(updatedData)
             }} 
-          removeUserInput = {removeUserInput}
-          userInputSelected = {userInputSelected}
-          setUserInputSelected = {setUserInputSelected}
+          removecategories = {removecategories}
+          categoriesSelected = {categoriesSelected}
+          setcategoriesSelected = {setcategoriesSelected}
             />
         </div>
         <div className='oneGraph'>

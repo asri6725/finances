@@ -36,4 +36,4 @@ Set of functions that check for the following things -
 ### TODO
 
 1. Update this docco with done items.
-2. Implement deleting parts of userInput.
+2. Implement deleting parts of categories.
