@@ -13,13 +13,11 @@ function App() {
   const [cummulativeData, setCummulativeData] = useState([]);
   const [cummulativeAmountBar, setCummulativeAmountBar] = useState({}); // bar graph data based on user input to cummulative data.
 
-  const [userInput, setUserInput] = useState(['Home', 'Home - mortgage', 'Home - rent', 'Food', 'Food - grocery', 'Food - eat out', 'Food - beer',
-  'Transport', 'Transport - personal', 'Transport - public', 'Transport - repair', 'Other']);
+  const [categories, setcategories] = useState(['Home', 'Grocery', 'Eating out', 'Transport', 'Other']);
 
-  const [userInputSelected, setUserInputSelected] = useState ([false, undefined]);
+  const [categoriesSelected, setcategoriesSelected] = useState ([false, undefined]);
   
   const [displayFileInfo, setDisplayFileInfo] = useState(true);
-  const [displayInfo, setDisplayInfo] = useState(true);
   const [displayInfo1, setDisplayInfo1] = useState(false);
   const [displayDemoUPloadedInfo, setdisplayDemoUPloadedInfo] = useState(false);
   const [uploaded, setUploaded] = useState(false)
@@ -30,12 +28,12 @@ function App() {
     setDisplayInfo1(true);
   }
 
-  const updateUserInput = (data) => {
-    setUserInput(prevUserInput => Array.from(new Set([...prevUserInput, data]))); 
+  const updatecategories = (data) => {
+    setcategories(prevcategories => Array.from(new Set([...prevcategories, data]))); 
   };
 
-  const removeUserInput = (data) => {
-    setUserInput(prevUserInput => prevUserInput.filter(item => item !== data));
+  const removecategories = (data) => {
+    setcategories(prevcategories => prevcategories.filter(item => item !== data));
   }
 
   return (
@@ -81,32 +79,22 @@ function App() {
           <DisplayTable 
             title={"Your cummulative transactions"} 
             rows = {cummulativeData} 
-            userInput = {userInput} 
-            userInputSelected = {userInputSelected}
+            categories = {categories} 
+            categoriesSelected = {categoriesSelected}
             updateCummulativeData={updatedData => {
               setCummulativeData(updatedData);
               setCummulativeAmountBar(display_cummulative_amount_bar(updatedData));
             }}
             />
             <CSVDownloader rows={cummulativeData} />
-            <div>
-              { displayInfo ? (<>
-              <br/><br/>
-              <Alert onClose={() => {setDisplayInfo(false)}} severity="info">You can use this table to categorise your transactions.<br/>At the moment, you have the following categories to choose from. Update them as you wish ^-^
-              <br/><br/>
-              <Button variant='outlined' onClick={()=>setDisplayInfo(false)}>Got it!</Button> </Alert>
-              </>
-              ) : <></>}
-              <br/><br/>
-            </div>
           <ButtonGroupComponent 
-          userInput={userInput} 
-          updateUserInput = { updatedData => {
-            updateUserInput(updatedData)
+          categories={categories} 
+          updatecategories = { updatedData => {
+            updatecategories(updatedData)
             }} 
-          removeUserInput = {removeUserInput}
-          userInputSelected = {userInputSelected}
-          setUserInputSelected = {setUserInputSelected}
+          removecategories = {removecategories}
+          categoriesSelected = {categoriesSelected}
+          setcategoriesSelected = {setcategoriesSelected}
             />
         </div>
         <div className='oneGraph'>
