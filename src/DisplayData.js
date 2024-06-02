@@ -34,8 +34,7 @@ function cummulative_amount_headings(categories){
         {
           field: 'category',
           headerName: 'Category',
-          type: 'singleSelect',flex:1, editable:true,
-          valueOptions: Array.from(new Set(categories))
+          flex:1, editable:true
         }
     ];
 }
@@ -189,7 +188,7 @@ export function ButtonGroupComponent(props) {
   }
 
   return (
-    <div>
+    <div className='button-group-component'>
     <>
       {chunkedButtonNames.map((chunk, index) => (
         <Grid container spacing={1} >
@@ -204,6 +203,7 @@ export function ButtonGroupComponent(props) {
                   selection[0] === true && selection[1] === buttonName ? 'default' : 'outlined'
                 }
                 key={idx}
+                sx={{ margin: '0 5px' }}
                 />
               ))}
             </div>

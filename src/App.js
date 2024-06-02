@@ -13,13 +13,11 @@ function App() {
   const [cummulativeData, setCummulativeData] = useState([]);
   const [cummulativeAmountBar, setCummulativeAmountBar] = useState({}); // bar graph data based on user input to cummulative data.
 
-  const [categories, setcategories] = useState(['Home', 'Home - mortgage', 'Home - rent', 'Food', 'Food - grocery', 'Food - eat out', 'Food - beer',
-  'Transport', 'Transport - personal', 'Transport - public', 'Transport - repair', 'Other']);
+  const [categories, setcategories] = useState(['Home', 'Grocery', 'Eating out', 'Transport', 'Other']);
 
   const [categoriesSelected, setcategoriesSelected] = useState ([false, undefined]);
   
   const [displayFileInfo, setDisplayFileInfo] = useState(true);
-  const [displayInfo, setDisplayInfo] = useState(true);
   const [displayInfo1, setDisplayInfo1] = useState(false);
   const [displayDemoUPloadedInfo, setdisplayDemoUPloadedInfo] = useState(false);
   const [uploaded, setUploaded] = useState(false)
@@ -89,16 +87,6 @@ function App() {
             }}
             />
             <CSVDownloader rows={cummulativeData} />
-            <div>
-              { displayInfo ? (<>
-              <br/><br/>
-              <Alert onClose={() => {setDisplayInfo(false)}} severity="info">You can use this table to categorise your transactions.<br/>At the moment, you have the following categories to choose from. Update them as you wish ^-^
-              <br/><br/>
-              <Button variant='outlined' onClick={()=>setDisplayInfo(false)}>Got it!</Button> </Alert>
-              </>
-              ) : <></>}
-              <br/><br/>
-            </div>
           <ButtonGroupComponent 
           categories={categories} 
           updatecategories = { updatedData => {

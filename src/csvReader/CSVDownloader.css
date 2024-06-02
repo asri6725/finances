@@ -1,21 +1,21 @@
 .SecondaryButton{
-    font-size: 17px;
-    font-weight: 100;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
     background-color: #0068bd;
     text-align: center;
     width: 130px;
-    height: fit-content;
     border: none;
-    padding: 1% 1%;
     transition: 0.3s;
     text-decoration: none;
     color: #FFFFFF;
-    border: 2px solid #e7e7e7; 
-    padding:1% 1%;
+    padding:10px 8px;
     border-radius: 5px;
+    margin-top: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 .SecondaryButton:hover{
-    background-color: #FFFFFF;
-    color: #0068bd;
+    background-color: #00559b;;
+    color: #FFFFFF;
     cursor: pointer;
 }
