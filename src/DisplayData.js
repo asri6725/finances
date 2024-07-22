@@ -6,6 +6,7 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import SendIcon from '@mui/icons-material/Send';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box, Paper, Chip, TextField, Grid, Alert, IconButton, InputAdornment, Button } from '@mui/material';
 import { useSnackbar } from 'notistack'; // If you're using a notification library
+import CSVDownloader from './csvReader/CSVDownloader';
 
 function cummulative_amount_headings(categories){
   return [
@@ -96,6 +97,7 @@ export function DisplayTable(props) {
           onRowClick={handleRowClick}
         />
       </Box>
+      <CSVDownloader rows={props.rows} />
     </div>
   );
 }
@@ -191,8 +193,8 @@ export function ButtonGroupComponent(props) {
     <div className='button-group-component'>
     <>
       {chunkedButtonNames.map((chunk, index) => (
-        <Grid container spacing={1} >
-          <Grid item spacing={30}>
+        <Grid container key={index}>
+          <Grid item>
             <div className="chip-container">
               {chunk.map((buttonName, idx) => (
                 <Chip 
@@ -220,7 +222,6 @@ export function ButtonGroupComponent(props) {
             value={inputText} 
             onChange={handleInputChange} 
             style={{ flex: '1', marginRight: '8px' }}
-            alignItems='center'
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">

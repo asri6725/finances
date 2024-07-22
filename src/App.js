@@ -3,7 +3,6 @@ import CSVReader, {getFileDataHeadings} from './csvReader/CsvReader';
 import React, { useState } from 'react';
 import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent, DisplayCategories} from './DisplayData';
 import {display_cummulative_amount, display_cummulative_amount_bar} from './Analysis';
-import CSVDownloader from './csvReader/CSVDownloader';
 import Review from './Review';
 import { Alert, Button } from '@mui/material';
 
@@ -86,7 +85,6 @@ function App() {
               setCummulativeAmountBar(display_cummulative_amount_bar(updatedData));
             }}
             />
-            <CSVDownloader rows={cummulativeData} />
           <ButtonGroupComponent 
           categories={categories} 
           updatecategories = { updatedData => {
