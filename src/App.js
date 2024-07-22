@@ -5,6 +5,8 @@ import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent
 import {display_cummulative_amount, display_cummulative_amount_bar} from './Analysis';
 import Review from './Review';
 import { Alert, Button } from '@mui/material';
+import {SlideDown} from 'react-slidedown'
+import 'react-slidedown/lib/slidedown.css'
 
 function App() {
   const [fileData, setFileData] = useState([]);
@@ -43,13 +45,14 @@ function App() {
       <div className='Review'>
         <Review />
       </div>
+      <SlideDown className={'my-dropdown-slidedown'}>
       <div className='importData'> 
         {displayFileInfo ? (
           <>
             <CSVReader pull_data={pull_data} setDisplayFileInfo={setDisplayFileInfo} setdisplayDemoUPloadedInfo={setdisplayDemoUPloadedInfo} setUploaded={setUploaded}/> 
             <div>
               <br/><br/>
-              <Alert severity="info">The reader looks for the following fields in the CSV file by looking at its text:<br /><br />1. 'description': containing text and spaces.<br />2. 'transactions': numbers begining with +/- ending with .XX . As this is a spending tool, only the outgoing amounts are filtered for further consideration.<br /> 3. 'date': string with XX/XX/XXXX format.<br />The headings are ignored to reduce dependency on the banks format.<br /><br /> All of this happens automatically, and there is no manual way for users to specify these fields. Please tell me if there are any issues using the feedback. </Alert>
+              <Alert severity="info">The reader looks for the following fields in the CSV file by looking at its text:<br /><br />1. 'description': containing text and spaces.<br />2. 'transactions': numbers begining with +/- ending with .XX . As this is a spending tool, only the outgoing amounts are filtered for further consideration.<br /> 3. 'date': one of the following string types: ['DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YYYY', 'DD-MM-YY'].<br />The headings are ignored to reduce dependency on the banks' format.<br /><br /> All of this happens automatically, and there is no manual way for users to specify these fields. Please tell me if there are any issues using the feedback section. </Alert>
               <br/><br/>
             </div>
             <div className='transactionTable'>
@@ -69,6 +72,7 @@ function App() {
           <><br /><br /><Alert severity="warning" onClose={() => {setdisplayDemoUPloadedInfo(false)}}>Populated all tables with demo data.<br /> Have a look around!<br /></Alert></>
         ):<></>}
       </div>
+      </SlideDown>
       {uploaded ? 
       <div className='output'>
         <div className='simplifiedFindings'>
