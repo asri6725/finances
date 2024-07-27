@@ -1,7 +1,7 @@
 export function Error(){
     return(
         <div>
-            You've hit the wrong page!
+            Page not found.
         </div>
     )
 }
