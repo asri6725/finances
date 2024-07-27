@@ -1,14 +1,32 @@
+import React, { useState } from 'react';
+import { Routes, Route } from "react-router-dom";
+
 import './App.css';
 import CSVReader, {getFileDataHeadings} from './csvReader/CsvReader';
-import React, { useState } from 'react';
 import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent, DisplayCategories} from './DisplayData';
 import {display_cummulative_amount, display_cummulative_amount_bar} from './Analysis';
 import Review from './Review';
-import { Alert, Button } from '@mui/material';
-import {SlideDown} from 'react-slidedown'
-import 'react-slidedown/lib/slidedown.css'
+import {Error} from './static_pages/error';
+import {Description} from './static_pages/description'
 
-function App() {
+import { Alert, Button } from '@mui/material';
+import {SlideDown} from 'react-slidedown';
+import 'react-slidedown/lib/slidedown.css';
+
+
+function App(){
+  return(
+    <Routes>
+        <Route path="/spending-analysis">
+          <Route index element={<Description />} />
+          <Route path="tracker" element={<Calculator />} />
+          <Route path="*" element={<Error />} />
+        </Route>
+      </Routes>
+  )
+}
+
+function Calculator() {
   const [fileData, setFileData] = useState([]);
   const [fileDataHeadings] = useState(getFileDataHeadings());
   const [cummulativeData, setCummulativeData] = useState([]);
