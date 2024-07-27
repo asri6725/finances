@@ -17,11 +17,11 @@ import 'react-slidedown/lib/slidedown.css';
 function App(){
   return(
     <Routes>
-        <Route path="/spending-analysis">
-          <Route index element={<Description />} />
-          <Route path="tracker" element={<Calculator />} />
-          <Route path="*" element={<Error />} />
-        </Route>
+        {/* <Route path="/spending-analysis"> */}
+          <Route path="/" element={<Description />} />
+          <Route path="/tracker" element={<Calculator />} />
+          {/* <Route path="*" element={<Error />} /> */}
+        {/* </Route> */}
       </Routes>
   )
 }

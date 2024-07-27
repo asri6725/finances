@@ -1,4 +1,5 @@
 import Paper from '@mui/material/Paper';
+import { Link } from "react-router-dom";
 import analyse from '../images/analyse.svg'
 import excel from '../images/excel.svg'
 import categorise from '../images/category.svg'
@@ -17,11 +18,11 @@ export function Description(){
             </div>
             <div className="desc">
                 <div className='desc-item'>
-                    <h3>Get ahead of your spending</h3>
+                    <h3>Get ahead of your spend</h3>
                 </div>
                 <div className='desc-item'>
-                    <p>This app is designed to help you understand your spending, which will help you become in control of it.</p>
-                    <p>Each month, you can import your transaction data and quickly categorise it. After which you can store the aggregate data into files of your choosing: any sheets app.</p>
+                    <p>This app is designed to help you understand your spend, which will enable you to take control of it.</p>
+                    <p>Each month, you can import your transaction data and quickly categorize it. Afterward, you can store the aggregated data in files of your choosing, compatible with any spreadsheet application.</p>
                 </div>
             </div>
             
@@ -51,9 +52,11 @@ export function Description(){
                     <p>Save it locally for future use</p>
                 </div>
             </div>
-            <Button variant="contained" href='/spending-analysis/tracker'>
+            <Link to="/tracker">
+            <Button variant="contained">
             Go to tracker
         </Button>
+        </Link>
             <Alert style={{'marginTop':'2em','marginBottom':'5em'}} severity="info">This app has been designed with your privacy and easy of maintenance in mind: <br />
             <ul>
 <li>This is just a categorisation tool. We do not offer an option to store your data. <br /></li>
