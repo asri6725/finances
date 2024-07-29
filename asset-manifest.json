@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/finances/static/css/main.f2088dbd.css",
+    "main.css": "/finances/static/css/main.71714847.css",
     "main.js": "/finances/static/js/main.13503610.js",
     "static/media/excel.svg": "/finances/static/media/excel.7034f7fa0071f8c419cb2ea90ef6ce6d.svg",
     "static/media/analyse.svg": "/finances/static/media/analyse.1a5c384cef6b8b7e016d3e515a9e8d9d.svg",
@@ -8,11 +8,11 @@
     "index.html": "/finances/index.html",
     "static/media/right.svg": "/finances/static/media/right.c41b709ceabc14ad3723af1f9dcfc86c.svg",
     "static/media/category.svg": "/finances/static/media/category.13fff7b48c01401e06e5522213423ae7.svg",
-    "main.f2088dbd.css.map": "/finances/static/css/main.f2088dbd.css.map",
+    "main.71714847.css.map": "/finances/static/css/main.71714847.css.map",
     "main.13503610.js.map": "/finances/static/js/main.13503610.js.map"
   },
   "entrypoints": [
-    "static/css/main.f2088dbd.css",
+    "static/css/main.71714847.css",
     "static/js/main.13503610.js"
   ]
 }
