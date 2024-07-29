@@ -6,7 +6,6 @@ import CSVReader, {getFileDataHeadings} from './csvReader/CsvReader';
 import { DisplaySimpleTable, DisplayTable, DisplayBarGraph, ButtonGroupComponent, DisplayCategories} from './DisplayData';
 import {display_cummulative_amount, display_cummulative_amount_bar} from './Analysis';
 import Review from './Review';
-import {Error} from './static_pages/error';
 import {Description} from './static_pages/description'
 
 import { Alert, Button } from '@mui/material';

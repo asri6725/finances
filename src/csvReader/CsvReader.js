@@ -81,6 +81,7 @@ export default function CSVReader(props) {
             date_style = date;
             console.log('date found:', value);
           }
+          return 0;
         } )
         if(number_regex.test(value)){
           if(parseFloat(value) < 0){

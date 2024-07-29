@@ -18,17 +18,34 @@
     color: #00559b;
 }
 
-.workflow{
-    width: fit-content;
+.workflow {
     display: flex;
     align-items: center;
     align-content: center;
     margin: auto;
     margin-top: 10rem;
     margin-bottom: 10rem;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents wrapping of items */
+    width: 100%; /* Ensures the container can expand */
 }
 
-.workflow-item{
+.workflow-item {
+    display: block;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
+    min-width: 300px; /* Adjust as needed to control the minimum width of each item */
+    max-width: 300px; /* Ensures the text will break within a specific width */
+    word-wrap: break-word; /* Allows long words to break and wrap onto the next line */
+    overflow-wrap: break-word; /* Provides better compatibility with different browsers */
+    word-break: break-all;
+}
+
+.workflow-item p {
+    max-width: 100%; /* Ensures the text will not exceed the container width */
+    word-wrap: break-word; /* Allows long words to break and wrap onto the next line */
+    overflow-wrap: break-word; /* Provides better compatibility with different browsers */
+    overflow: hidden;
 }

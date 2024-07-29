@@ -1,4 +1,3 @@
-import Paper from '@mui/material/Paper';
 import { Link } from "react-router-dom";
 import analyse from '../images/analyse.svg'
 import excel from '../images/excel.svg'
@@ -18,38 +17,34 @@ export function Description(){
             </div>
             <div className="desc">
                 <div className='desc-item'>
-                    <h3>Get ahead of your spend</h3>
-                </div>
-                <div className='desc-item'>
                     <p>This app is designed to help you understand your spend, which will enable you to take control of it.</p>
                     <p>Each month, you can import your transaction data and quickly categorize it. Afterward, you can store the aggregated data in files of your choosing, compatible with any spreadsheet application.</p>
                 </div>
             </div>
-            
             <div className='workflow'>
                 <div className='workflow-item'>
-                    <img src={excel} className='images'/>
-                    <p>Download your bank statements in excel (CSV) format</p>
+                    <img src={excel} alt='excel icon' className='images'/>
+                    <p className='icon-desc'>Download bank statements<br/>in excel (CSV) format</p>
                 </div>
-                <img src={right} className='images' />
+                <img src={right} alt='right arrow' className='images' />
                 <div className='workflow-item'>
-                    <img src={upload} className='images'/>
-                    <p>Upload the CSV File</p>
+                    <img src={upload} alt='upload icon' className='images'/>
+                    <p className='icon-desc'>Upload the CSV File</p>
                 </div>
-                <img src={right} className='images' />
+                <img src={right} alt='right arrow' className='images' />
                 <div className='workflow-item'>
-                    <img src={categorise} className='images'/>
-                    <p>Categorise it with our UI</p>
+                    <img src={categorise} alt='categorise icon' className='images'/>
+                    <p className='icon-desc'>Categorise it with our UI</p>
                 </div>
-                <img src={right} className='images' />
+                <img src={right} alt='right arrow' className='images' />
                 <div className='workflow-item'>
-                    <img src={analyse} className='images'/>
-                    <p>Generate insights</p>
+                    <img src={analyse} alt='analyse icon' className='images'/>
+                    <p className='icon-desc'>Generate insights</p>
                 </div>
-                <img src={right} className='images' />
+                <img src={right} alt='right arrow' className='images' />
                 <div className='workflow-item'>
-                    <img src={excel} className='images'/>
-                    <p>Save it locally for future use</p>
+                    <img src={excel} alt='excel icon' className='images'/>
+                    <p className='icon-desc'>Save it locally for future use</p>
                 </div>
             </div>
             <Link to="/tracker">
