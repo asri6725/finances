@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/spending-analysis/static/css/main.7a48e946.css",
-    "main.js": "/spending-analysis/static/js/main.9813c7af.js",
-    "static/media/excel.svg": "/spending-analysis/static/media/excel.7034f7fa0071f8c419cb2ea90ef6ce6d.svg",
-    "static/media/analyse.svg": "/spending-analysis/static/media/analyse.1a5c384cef6b8b7e016d3e515a9e8d9d.svg",
-    "static/media/upload.svg": "/spending-analysis/static/media/upload.e69fa055966653a965e998e09812d2fb.svg",
-    "index.html": "/spending-analysis/index.html",
-    "static/media/right.svg": "/spending-analysis/static/media/right.c41b709ceabc14ad3723af1f9dcfc86c.svg",
-    "static/media/category.svg": "/spending-analysis/static/media/category.13fff7b48c01401e06e5522213423ae7.svg",
-    "main.7a48e946.css.map": "/spending-analysis/static/css/main.7a48e946.css.map",
-    "main.9813c7af.js.map": "/spending-analysis/static/js/main.9813c7af.js.map"
+    "main.css": "/finances/static/css/main.f2088dbd.css",
+    "main.js": "/finances/static/js/main.13503610.js",
+    "static/media/excel.svg": "/finances/static/media/excel.7034f7fa0071f8c419cb2ea90ef6ce6d.svg",
+    "static/media/analyse.svg": "/finances/static/media/analyse.1a5c384cef6b8b7e016d3e515a9e8d9d.svg",
+    "static/media/upload.svg": "/finances/static/media/upload.e69fa055966653a965e998e09812d2fb.svg",
+    "index.html": "/finances/index.html",
+    "static/media/right.svg": "/finances/static/media/right.c41b709ceabc14ad3723af1f9dcfc86c.svg",
+    "static/media/category.svg": "/finances/static/media/category.13fff7b48c01401e06e5522213423ae7.svg",
+    "main.f2088dbd.css.map": "/finances/static/css/main.f2088dbd.css.map",
+    "main.13503610.js.map": "/finances/static/js/main.13503610.js.map"
   },
   "entrypoints": [
-    "static/css/main.7a48e946.css",
-    "static/js/main.9813c7af.js"
+    "static/css/main.f2088dbd.css",
+    "static/js/main.13503610.js"
   ]
 }
