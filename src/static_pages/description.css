@@ -49,3 +49,14 @@
     overflow-wrap: break-word; /* Provides better compatibility with different browsers */
     overflow: hidden;
 }
+
+@media (max-width: 600px) {
+    .desc{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .desc-item{
+        margin-left:0;
+    }
+    
+}    
