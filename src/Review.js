@@ -15,7 +15,7 @@ const Review = () => {
     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
     borderRadius: '8px',
     transition: '0.3s ease-in-out',
-    ...(showCloseButton && { paddingRight: '40px' }), // Adjust padding for close button
+    ...(showCloseButton && { paddingRight: '40px' }),
   };
 
   const closeButtonStyle = {
@@ -32,25 +32,23 @@ const Review = () => {
   const redirectUsers = () => {
     const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdNucdJgg0M6Zz8lLOHxMduVANcYROWhNYXyXCoUYmcOTa_qA/viewform';
     window.open(googleFormUrl, '_blank');
+  };
+
+  if (deleteReviewSection) {
+    return null;
   }
 
   return (
-    <>
-    {deleteReviewSection ? <></> : (
-    <>
-      <div style={floatingStyle} onMouseEnter={() => setShowCloseButton(true)} onMouseLeave={() => setShowCloseButton(false)}>
+    <div style={floatingStyle} onMouseEnter={() => setShowCloseButton(true)} onMouseLeave={() => setShowCloseButton(false)}>
       <Button variant="contained" onClick={() => redirectUsers()}>
         Feedback
       </Button>
       {showCloseButton && (
-          <span style={closeButtonStyle} onClick={handleRemoveFloatingDiv}>
-            x
-          </span>
-        )}
-      </div>
-    </>
-    )}
-        </>
+        <span style={closeButtonStyle} onClick={handleRemoveFloatingDiv}>
+          x
+        </span>
+      )}
+    </div>
   );
 };
 
