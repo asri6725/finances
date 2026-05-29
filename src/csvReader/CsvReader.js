@@ -51,106 +51,81 @@ export default function CSVReader(props) {
   );
   const [loading, setLoading] = useState(false);
 
-  /*
-    Determine the structure of csv. I need - Date, Amount, Description.
-    Date - location is determined by moment js.
-    Amount - This is the column of csv with max amounts of negative transactions - $-1 coffee, etc
-    Description - Is not a number.
-
-    Check whether the first row contains headings - to skip it. If there is a number in the first row, it doens't contain headings.
-
-    Regex to check for +/- XXX.XX numbers - ^[+-][0-9]*.[0-9][0-9]$
-    Regex to check for atleast one alphabet - [a-zA-Z]
-    Regex to check for just alphabets - ^[a-zA-Z]*$
-  */
-
   const determineStructure = (data) => {
-    var headings = {}
-    var numbers = {}
+    const headings = {};
+    const numbers = {};
     const alphanumeric_regex = new RegExp('[a-zA-Z]');
     const number_regex = new RegExp('^[+-][0-9]*.[0-9][0-9]$');
-    var results = data.slice(0,Math.min(6, data.length));
-    var date_formats = ['DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YYYY', 'DD-MM-YY']
-    var date_style;
-    results.map( (result) => {
-      result.map ( (value, index) => {
-        date_formats.map( (date) => {
+    const results = data.slice(0, Math.min(6, data.length));
+    const date_formats = ['DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YYYY', 'DD-MM-YY'];
+    let date_style;
+
+    results.forEach((result) => {
+      result.forEach((value, index) => {
+        date_formats.forEach((date) => {
           console.log("checking if date:", value, moment(value, date, true).isValid());
-          if(moment(value, date, true).isValid()){
+          if (moment(value, date, true).isValid()) {
             headings.date = index;
             date_style = date;
             console.log('date found:', value);
           }
-        } )
-        if(number_regex.test(value)){
-          if(parseFloat(value) < 0){
-            if(!numbers[index]){
-              numbers[index] = 1;
-            }
-            else{
-              numbers[index] += 1;
-            }
+        });
+        if (number_regex.test(value)) {
+          if (parseFloat(value) < 0) {
+            numbers[index] = (numbers[index] || 0) + 1;
           }
-        }
-        else if(alphanumeric_regex.test(value)){
+        } else if (alphanumeric_regex.test(value)) {
           headings.description = index;
         }
-        return 0;
-      })
-      return 0;
-    })
+      });
+    });
 
-    var max_key = Object.keys(numbers)[0];
-    for(const[key, value] of Object.entries(numbers)){
-      if(value > numbers[max_key]){
+    let max_key = Object.keys(numbers)[0];
+    for (const [key, value] of Object.entries(numbers)) {
+      if (value > numbers[max_key]) {
         max_key = key;
       }
     }
     headings.amount = max_key;
-    console.log("Final headings indices:",headings)
+    console.log("Final headings indices:", headings);
     return [headings, date_style];
-  }
+  };
 
   const processResults = (results) => {
-
-    // shift if first row contains headings
-    var contains_headings = true;
-    for(var j=0; j<results[0].length; j++){
-      if(!new RegExp('^[a-zA-Z ]*$').test(results[0][j])){
+    let contains_headings = true;
+    for (let j = 0; j < results[0].length; j++) {
+      if (!new RegExp('^[a-zA-Z ]*$').test(results[0][j])) {
         contains_headings = false;
       }
     }
-    if(contains_headings){
+    if (contains_headings) {
       results.shift();
     }
 
-    var result = determineStructure(results)
+    const result = determineStructure(results);
 
-    var headings = result[0]
-    var date_style = result[1];
-    var tmp = []
+    const headings = result[0];
+    const date_style = result[1];
+    const tmp = [];
 
-    for(var i=0; i<results.length; i++){
-      if (results[i].length > 1){
+    for (let i = 0; i < results.length; i++) {
+      if (results[i].length > 1) {
         tmp.push({
-          'id':i,
-          'date':moment(results[i][headings.date], date_style, true),
-          // 'date':results[i][headings.date],
-          'amount':parseFloat(results[i][headings.amount]),
-          'description':results[i][headings.description]
-      });
+          id: i,
+          date: moment(results[i][headings.date], date_style, true),
+          amount: parseFloat(results[i][headings.amount]),
+          description: results[i][headings.description]
+        });
       }
     }
     props.pull_data(tmp);
-    results = {}
-    setLoading(true)
+    setLoading(true);
     setTimeout(() => {
       setLoading(false);
       props.setDisplayFileInfo(false);
       props.setUploaded(true);
     }, 1000);
-    
-  }
+  };
 
   return (
     <>
@@ -221,7 +196,7 @@ export default function CSVReader(props) {
         </>
       )}
     </CSVReader>
-    <Button variant="contained" onClick={() =>{ processResults(demoData); props.setdisplayDemoUPloadedInfo(true)}}>Demo Data</Button>
+    <Button variant="contained" onClick={() =>{ processResults(demoData); props.setDisplayDemoUploadedInfo(true)}}>Demo Data</Button>
     </div>
             }
             </>
